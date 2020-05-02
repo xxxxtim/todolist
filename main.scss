@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #e1e1e1;
+}
+a {
+  text-decoration: none;
+}
+header {
+  background-color: #4a90e2;
+}
+input {
+  border: none;
+  padding-left: 16px;
+}
+nav {
+  width: 100%;
+  height: 76px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+nav > a {
+  font-family: Roboto-Regular;
+  color: #00408b;
+  font-size: 24px;
+  &:hover {
+    color: #ffffff;
+  }
+}
+.nav_active {
+  font-family: Roboto-Medium;
+}
+main {
+  width: 620px;
+  //   height: 520px;
+  margin: 22px auto 0 auto;
+  background-color: #f2f2f2;
+}
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+.typeTitle {
+  width: 248px;
+  height: 28px;
+
+  font-family: Roboto-Medium;
+  font-size: 24px;
+  color: #000000;
+  font-weight: bold;
+}
+// ::placeholder {
+//   font-family: Roboto-Medium;
+//   font-size: 24px;
+//   color: #000000;
+//   font-weight: bold;
+// }
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+  box-shadow: 0 5px 4px -4px black;
+  padding: 0 25px;
+}
+.pen {
+  font-size: 24px;
+  color: #4a90e2;
+}
+.star {
+  font-size: 24px;
+  cursor: pointer;
+}
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* padding-left: 150px; */
+  height: 405px;
+}
+.contentPicture {
+  font-size: 15px;
+  //   margin-left: 25px;
+}
+.contentTitle {
+  font-weight: bold;
+  font-size: 20px;
+}
+.deadlineInput {
+  width: 162px;
+  height: 35px;
+
+  font-family: Roboto-Regular;
+  font-size: 16px;
+  color: #c8c8c8;
+}
+
+.memoInput {
+  width: 445px;
+  height: 120px;
+
+  font-family: Roboto-Regular;
+  font-size: 16px;
+  color: #c8c8c8;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.plus {
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.cancleinput {
+  padding: 0;
+  font-family: Roboto-Regular;
+  font-size: 24px;
+  width: 50%;
+  height: 60px;
+  color: #d0021b;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.addinput {
+  padding: 0;
+  font-family: Roboto-Regular;
+  font-size: 24px;
+  color: #ffffff;
+  background-color: #4a90e2;
+  //   width: 310px;
+  width: 50%;
+  height: 60px;
+  cursor: pointer;
+}
+.buttonWrapper {
+  font-size: 0;
+}
+.dateWrapper {
+  margin-left: 15px;
+  margin-top: 8px;
+}
+
+.datelineWrapper {
+  margin-left: 30px;
+}
+
+.fileWrapper {
+  margin-left: 30px;
+}
+.commentWrapper {
+  margin-left: 30px;
+}
