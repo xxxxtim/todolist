@@ -19,96 +19,97 @@
         </nav>
     </header>
     <main>
-        <div class="titleContainer">
-            <div>
-                <input type="checkbox">
-                <input class="typeTitle" type="text" placeholder="Type Something Here…">
-            </div>
-            <div>
-                <i class="far fa-star star"></i>
-                <i class="fas fa-pen pen"></i>
-            </div>
-        </div>
-        <div class="contentWrapper">
-            <div class="datelineWrapper">
+        <form id="myForm">
+            <div class="titleContainer">
                 <div>
-                    <i class="far fa-calendar-alt contentIcon"></i>
-                    <span class="contentTitle">Deadline</span>
-                </div>
-                <div class="dateWrapper">
-                    <input class="deadlineInput" type="text" placeholder="yyyy-mm-dd">
-                    <input class="deadlineInput" type="text" placeholder="hh:mm">
-                </div>
-            </div>
-
-            <div class="fileWrapper">
-                <div>
-                    <i class="far fa-file contentIcon"></i>
-                    <span class="contentTitle">File</span>
+                    <input type="checkbox">
+                    <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
                 </div>
                 <div>
-                    <input class="plus" type="submit" value="+">
+                    <i class="far fa-star star"></i>
+                    <i class="fas fa-pen pen"></i>
                 </div>
             </div>
-
-            <div class="commentWrapper">
-                <div>
-                    <i class="far fa-comment-dots contentIcon"></i>
-                    <span class="contentTitle">Comment</span>
+            <div class="contentWrapper">
+                <div class="datelineWrapper">
+                    <div>
+                        <i class="far fa-calendar-alt contentIcon"></i>
+                        <span class="contentTitle">Deadline</span>
+                    </div>
+                    <div class="dateWrapper">
+                        <input id="year-text" class="deadlineInput" type="text" placeholder="yyyy-mm-dd">
+                        <input id="hour-text" class="deadlineInput" type="text" placeholder="hh:mm">
+                    </div>
                 </div>
-                <div>
 
-                    <input class="memoInput" type="text" placeholder="Type your memo here">
+                <div class="fileWrapper">
+                    <div>
+                        <i class="far fa-file contentIcon"></i>
+                        <span class="contentTitle">File</span>
+                    </div>
+                    <div>
+                        <input class="plus" type="submit" value="+">
+                    </div>
+                </div>
 
+                <div class="commentWrapper">
+                    <div>
+                        <i class="far fa-comment-dots contentIcon"></i>
+                        <span class="contentTitle">Comment</span>
+                    </div>
+                    <div>
+
+                        <input id="comment-text" class="memoInput" type="text" placeholder="Type your memo here">
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="buttonWrapper">
-            <input class="cancleinput" type="submit" value="✕ Cancle">
-            <input class="addinput" type="submit" value="+ Add Task">
-        </div>
-
+            <div class="buttonWrapper">
+                <input class="cancleinput" type="submit" value="✕ Cancle">
+                <input class="addinput" type="submit" value="+ Add Task">
+            </div>
+        </form>
     </main>
 
+    <div id="plates">
+        <!-- <div class="recordContainer">
+            <div class="messageContainer">
+                <div>
+                    <input type="checkbox">
+                    <input class="typeTitle" type="text" placeholder="Type Something Here…">
+                </div>
+                <div>
+                    <i class="far fa-star star"></i>
+                    <i class="fas fa-pen pen"></i>
+                </div>
+            </div>
+            <div class="mgIconWrapper">
+                <i class="far fa-file messageIcon"></i>
+                <i class="far fa-comment-dots messageIcon"></i>
+            </div>
+        </div>
 
-    <div class="recordContainer">
-        <div class="messageContainer">
-            <div>
-                <input type="checkbox">
-                <input class="typeTitle" type="text" placeholder="Type Something Here…">
+        <div class="recordContainer">
+            <div class="messageContainer">
+                <div>
+                    <input type="checkbox">
+                    <input class="typeTitle" type="text" placeholder="Type Something Here…">
+                </div>
+                <div>
+                    <i class="far fa-star star"></i>
+                    <i class="fas fa-pen pen"></i>
+                </div>
             </div>
-            <div>
-                <i class="far fa-star star"></i>
-                <i class="fas fa-pen pen"></i>
+            <div class="mgIconWrapper">
+                <i class="far fa-file messageIcon"></i>
+                <i class="far fa-comment-dots messageIcon"></i>
             </div>
-        </div>
-        <div class="mgIconWrapper">
-            <i class="far fa-file messageIcon"></i>
-            <i class="far fa-comment-dots messageIcon"></i>
-        </div>
+        </div> -->
     </div>
 
-    <div class="recordContainer">
-        <div class="messageContainer">
-            <div>
-                <input type="checkbox">
-                <input class="typeTitle" type="text" placeholder="Type Something Here…">
-            </div>
-            <div>
-                <i class="far fa-star star"></i>
-                <i class="fas fa-pen pen"></i>
-            </div>
-        </div>
-        <div class="mgIconWrapper">
-            <i class="far fa-file messageIcon"></i>
-            <i class="far fa-comment-dots messageIcon"></i>
-        </div>
-    </div>
 
 
-
-
-
+    <script src="main.js"></script>
 
 </body>
 
