@@ -5,6 +5,7 @@
 
 body {
   background-color: #e1e1e1;
+  min-width: 1024px;
 }
 
 a {
@@ -17,7 +18,7 @@ header {
 
 input {
   border: none;
-  padding-left: 16px;
+  padding-left: 7px;
 }
 
 nav {
@@ -57,20 +58,11 @@ input[type=checkbox] {
 .typeTitle {
   width: 248px;
   height: 28px;
+  margin-left: 10px;
   font-family: Roboto-Medium;
   font-size: 24px;
   color: #000000;
   font-weight: bold;
-}
-
-.titleContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 76px;
-  box-shadow: 0 5px 4px -4px black;
-  padding: 0 25px;
 }
 
 .pen {
@@ -81,6 +73,7 @@ input[type=checkbox] {
 .star {
   font-size: 24px;
   cursor: pointer;
+  margin-right: 30px;
 }
 
 .contentWrapper {
@@ -89,10 +82,15 @@ input[type=checkbox] {
   justify-content: space-evenly;
   /* padding-left: 150px; */
   height: 405px;
+  margin-left: 75px;
 }
 
-.contentPicture {
+.contentIcon, .messageIcon {
   font-size: 15px;
+}
+
+.messageIcon {
+  margin: 0 5px;
 }
 
 .contentTitle {
@@ -153,6 +151,7 @@ input[type=checkbox] {
 
 .buttonWrapper {
   font-size: 0;
+  box-shadow: 0 5px 4px -4px black;
 }
 
 .dateWrapper {
@@ -160,16 +159,28 @@ input[type=checkbox] {
   margin-top: 8px;
 }
 
-.datelineWrapper {
-  margin-left: 30px;
+.recordContainer {
+  width: 620px;
+  margin: 22px auto 0 auto;
+  background-color: #fff2dc;
 }
 
-.fileWrapper {
-  margin-left: 30px;
+.titleContainer, .messageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+  box-shadow: 0 5px 4px -4px black;
+  padding: 0 25px;
 }
 
-.commentWrapper {
-  margin-left: 30px;
+.messageContainer {
+  box-shadow: none;
+}
+
+.mgIconWrapper {
+  padding: 0 70px 10px 70px;
 }
 
 /*# sourceMappingURL=main.css.map */
