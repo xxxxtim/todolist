@@ -1,24 +1,25 @@
 
-var myForm = document.getElementById('myForm');
-var titleText = document.getElementById('title-text');
-var yearText = document.getElementById('year-text');
-var hourText = document.getElementById('hour-text');
-var commentText = document.getElementById('comment-text');
+var myForm;
+var titleText;
+var yearText;
+var hourText;
+var commentText;
 var datalist;
-var main = document.getElementById('mainWrapper');
+var main;
 // console.log(main)
 
 
 // button
-var addTask = document.querySelector('.addTaskButton')
-var addInput = document.querySelector('.addinput');
-var cancleInput = document.querySelector('.cancleinput');
+var addTask;
+var addInput;
+var cancleInput;
 
 var datas = [];
 
-
+addTask = document.querySelector('.addTaskButton');
 addTask.addEventListener('click', () => {
-    console.log(main)
+    // console.log(main)
+    main = document.getElementById('mainWrapper');
     main.innerHTML
         = `<div class="myFormWrapper">
 <form id="myForm">
@@ -81,18 +82,25 @@ addTask.addEventListener('click', () => {
     commentText = document.getElementById('comment-text');
     datalist = document.getElementById('plates');
     main = document.getElementById('mainWrapper');
-
-    var addInput = document.querySelector('.addinput');
-    var cancleInput = document.querySelector('.cancleinput');
-
-    var datas = [];
+    // 按按鈕 彈出表格
+    addInput = document.querySelector('.addinput');
     addInput.addEventListener('click', pushData);
+    // 按按鈕 刪除表格
+    cancleInput = document.querySelector('.cancleinput');
+    cancleInput.addEventListener('click', deleteData)
 });
 
+// 按按鈕 刪除表格
+function deleteData() {
+    main = document.getElementById('mainWrapper');
+    main.innerHTML
+        = ``;
+}
 
 
 
-// addInput.addEventListener('click', pushData);
+
+// 按按鈕 彈出表格
 function pushData(e) {
     // 加上preventDefault()避免每次submit都會重整網頁
     e.preventDefault();
@@ -121,7 +129,7 @@ function pushData(e) {
     myForm.reset();
 
 }
-
+// 顯示程式
 function displayData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
@@ -139,6 +147,8 @@ function displayData(datas, datalist) {
                 </div>
             </div>
             <div class="mgIconWrapper">
+                <i class="far fa-calendar-alt messageIcon"></i>
+                <span class="dateStamp">123</span>
                 <i class="far fa-file messageIcon"></i>
                 <i class="far fa-comment-dots messageIcon"></i>
             </div>
