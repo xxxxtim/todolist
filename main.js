@@ -1,9 +1,10 @@
-const myForm = document.getElementById('myForm')
+const myForm = document.getElementById('myForm');
 const titleText = document.getElementById('title-text');
 const yearText = document.getElementById('year-text');
 const hourText = document.getElementById('hour-text');
 const commentText = document.getElementById('comment-text');
 const datalist = document.getElementById('plates');
+
 // button
 const addInput = document.querySelector('.addinput');
 const cancleInput = document.querySelector('.cancleinput');
@@ -12,6 +13,8 @@ const datas = [];
 
 addInput.addEventListener('click', pushData);
 function pushData(e) {
+    // 加上preventDefault()避免每次submit都會重整網頁
+    e.preventDefault();
     //選取輸入框的輸入文字
     const title_text = titleText.value;
     const year_text = yearText.value;
@@ -28,7 +31,7 @@ function pushData(e) {
         comment: comment_text,
     }
     datas.push(data);
-    // console.table(datas)
+    console.table(datas)
 
     // 顯示程式
     displayData(datas, datalist);
@@ -39,6 +42,7 @@ function pushData(e) {
 }
 
 function displayData(datas, datalist) {
+    // console.log(datalist)
     datalist.innerHTML = datas.map((data, i) => {
         return `
         <div class="recordContainer">
