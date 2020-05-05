@@ -1,0 +1,55 @@
+.addTaskwrapper {
+    width: 620px;
+    margin: 22px auto 0 auto;
+    background-color: #f2f2f2;
+    @include medium {
+        width: 90%;
+    }
+}
+.addTaskButton {
+    width: 100%;
+    height: 65px;
+    font-size: 24px;
+    color: #c8c8c8;
+    background-color: #ffffff;
+    border: 2px solid #c8c8c8;
+    border-radius: 5px;
+    text-align: left;
+    padding-left: 30px;
+    cursor: pointer;
+    @include small {
+        font-size: 17px;
+    }
+}
+
+.cancleinput {
+    padding: 0;
+    font-family: Roboto-Regular;
+    font-size: 24px;
+    width: 50%;
+    height: 60px;
+    color: #d0021b;
+    background-color: #ffffff;
+    cursor: pointer;
+    @include small {
+        font-size: 17px;
+    }
+}
+.addinput {
+    padding: 0;
+    font-family: Roboto-Regular;
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #4a90e2;
+    //   width: 310px;
+    width: 50%;
+    height: 60px;
+    cursor: pointer;
+    @include small {
+        font-size: 17px;
+    }
+}
+.buttonWrapper {
+    font-size: 0;
+    box-shadow: 0 5px 4px -4px black;
+}

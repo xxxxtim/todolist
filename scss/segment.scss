@@ -1,0 +1,13 @@
+// 段點設定
+$medium-width: 660px;
+@mixin medium {
+    @media (max-width: $medium-width) {
+        @content;
+    }
+}
+$small-width: 360px;
+@mixin small {
+    @media (max-width: $small-width) {
+        @content;
+    }
+}

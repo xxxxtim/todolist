@@ -1,0 +1,60 @@
+.typeTitle {
+    width: 248px;
+    height: 28px;
+    margin-left: 10px;
+    font-family: Roboto-Medium;
+    font-size: 24px;
+    color: #000000;
+    font-weight: bold;
+    @include medium {
+        width: 76%;
+        font-size: 14px;
+    }
+}
+
+.pen {
+    font-size: 24px;
+    color: #4a90e2;
+    @include small {
+        font-size: 17px;
+    }
+}
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 30px;
+    @include medium {
+        margin-right: 0;
+    }
+    @include small {
+        font-size: 17px;
+    }
+}
+.mgIconWrapper {
+    // padding: 0 70px;
+    padding: 0 70px 10px 70px;
+    @include medium {
+        padding: 0 45px 10px 45px;
+    }
+    @include small {
+        padding: 0 15px;
+    }
+}
+.messageContainer {
+    @extend .titleContainer;
+    box-shadow: none;
+
+    @include medium {
+        margin: 0 15px;
+        justify-content: space-between;
+    }
+
+    @include small {
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+}
+.messageIcon {
+    @extend .contentIcon;
+    margin: 0 5px;
+}
