@@ -264,6 +264,10 @@ input[type=checkbox] {
   }
 }
 
+.typeTitleLine {
+  text-decoration: line-through;
+}
+
 .pen {
   font-size: 24px;
   color: #4a90e2;

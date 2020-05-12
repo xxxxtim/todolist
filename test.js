@@ -25,7 +25,7 @@ addTask.addEventListener('click', () => {
 <form id="myForm">
     <div class="titleContainer">
         <div>
-            <input type="checkbox">
+            <input type="checkbox" name="tick">
             <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
         </div>
         <div>
@@ -128,6 +128,8 @@ function pushData(e) {
 
     // 星星處理
     starProcessing();
+    // 打勾處理
+    tickProcessing();
 
     // 清空輸入欄位的文字
     myForm.reset();
@@ -141,7 +143,7 @@ function displayData(datas, datalist) {
         <div class="recordContainer">
             <div class="messageContainer">
                 <div>
-                    <input type="checkbox">
+                    <input type="checkbox" name="tick">
                     <span class="typeTitle"> ${data.title}</span>
 
                 </div>
@@ -182,8 +184,17 @@ function starProcessing() {
             // })
         })
     })
+}
 
+// 打勾處理
+function tickProcessing() {
+    const Ticks = document.getElementsByName("tick");
+    const TypeTitle = document.querySelectorAll('.typeTitle')
 
-
+    Ticks.forEach((tick, index) => {
+        tick.addEventListener('click', function () {
+            TypeTitle[index].classList.toggle('typeTitleLine');
+        })
+    })
 }
 
