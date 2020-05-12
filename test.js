@@ -29,7 +29,7 @@ addTask.addEventListener('click', () => {
             <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
         </div>
         <div>
-            <i class="far fa-star star"></i>
+            <i class="fas fa-star star"></i>
             <i class="fas fa-pen pen"></i>
         </div>
     </div>
@@ -115,8 +115,9 @@ function pushData(e) {
         title: title_text,
         year: year_text,
         hour: hour_text,
-        done: false,
-        file: false,
+        done: false,//判斷有無打勾
+        file: false,//判斷有無上傳檔案
+        star: false,//判斷星星
         comment: comment_text,
     }
     datas.push(data);
@@ -124,6 +125,9 @@ function pushData(e) {
 
     // 顯示程式
     displayData(datas, datalist);
+
+    // 星星處理
+    starProcessing();
 
     // 清空輸入欄位的文字
     myForm.reset();
@@ -142,7 +146,7 @@ function displayData(datas, datalist) {
 
                 </div>
                 <div>
-                    <i class="far fa-star star"></i>
+                    <i class="fas fa-star star"></i>
                     <i class="fas fa-pen pen"></i>
                 </div>
             </div>
@@ -158,3 +162,28 @@ function displayData(datas, datalist) {
 
     })
 }
+
+// 星星處理
+function starProcessing() {
+    const chooseStar = document.querySelectorAll('.star');
+    const RecordContainer = document.querySelectorAll('.recordContainer');
+    const TitleContainer = document.querySelector('.titleContainer');
+    // console.log(chooseStar);
+
+    chooseStar.forEach((starData, index) => {
+        // console.log(starData)
+        starData.addEventListener('click', function () {
+            // console.log("ddddddd");
+            starData.classList.toggle('starColor');
+
+            // RecordContainer.forEach((containerData, index) => {
+            // TitleContainer.classList.toggle('titleContainerColor');
+            RecordContainer[index - 1].classList.toggle('recordContainerColor');
+            // })
+        })
+    })
+
+
+
+}
+

@@ -23,6 +23,7 @@
     font-size: 24px;
     cursor: pointer;
     margin-right: 30px;
+    color: gray;
     @include medium {
         margin-right: 0;
     }
@@ -30,6 +31,11 @@
         font-size: 17px;
     }
 }
+
+.starColor {
+    color: yellow;
+}
+
 .mgIconWrapper {
     // padding: 0 70px;
     padding: 0 70px 10px 70px;

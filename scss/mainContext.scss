@@ -81,10 +81,13 @@ input[type="checkbox"] {
 .recordContainer {
   width: 620px;
   margin: 22px auto 0 auto;
-  background-color: #fff2dc;
+  background-color: #f2f2f2;
   @include medium {
     width: 90%;
   }
+}
+.recordContainerColor {
+  background: #fff2dc;
 }
 
 .titleContainer {
@@ -102,6 +105,9 @@ input[type="checkbox"] {
   @include small {
     padding: 0 15px;
   }
+}
+.titleContainerColor {
+  background-color: #fff2dc;
 }
 
 .dateStamp {

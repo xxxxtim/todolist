@@ -207,12 +207,16 @@ input[type=checkbox] {
 .recordContainer {
   width: 620px;
   margin: 22px auto 0 auto;
-  background-color: #fff2dc;
+  background-color: #f2f2f2;
 }
 @media (max-width: 660px) {
   .recordContainer {
     width: 90%;
   }
+}
+
+.recordContainerColor {
+  background: #fff2dc;
 }
 
 .titleContainer, .messageContainer {
@@ -234,6 +238,10 @@ input[type=checkbox] {
   .titleContainer, .messageContainer {
     padding: 0 15px;
   }
+}
+
+.titleContainerColor {
+  background-color: #fff2dc;
 }
 
 .dateStamp {
@@ -270,6 +278,7 @@ input[type=checkbox] {
   font-size: 24px;
   cursor: pointer;
   margin-right: 30px;
+  color: gray;
 }
 @media (max-width: 660px) {
   .star {
@@ -280,6 +289,10 @@ input[type=checkbox] {
   .star {
     font-size: 17px;
   }
+}
+
+.starColor {
+  color: yellow;
 }
 
 .mgIconWrapper {
