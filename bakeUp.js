@@ -13,17 +13,8 @@ var main;
 var addTask;
 var addInput;
 var cancleInput;
-// object
+
 var datas = [];
-var data = {
-    title: "",
-    year: "",
-    hour: "",
-    done: false,//判斷有無打勾
-    file: false,//判斷有無上傳檔案
-    star: false,//判斷星星
-    comment: "",
-}
 
 addTask = document.querySelector('.addTaskButton');
 addTask.addEventListener('click', () => {
@@ -49,8 +40,8 @@ addTask.addEventListener('click', () => {
                 <span class="contentTitle">Deadline</span>
             </div>
             <div class="dateWrapper">
-                <input id="year-text" class="deadlineInput" type="date" placeholder="yyyy-mm-dd">
-                <input id="hour-text" class="deadlineInput" type="time" placeholder="hh:mm">
+                <input id="year-text" class="deadlineInput" type="text" placeholder="yyyy-mm-dd">
+                <input id="hour-text" class="deadlineInput" type="text" placeholder="hh:mm">
             </div>
         </div>
 
@@ -114,33 +105,21 @@ function pushData(e) {
     // 加上preventDefault()避免每次submit都會重整網頁
     e.preventDefault();
     //選取輸入框的輸入文字
-    // const title_text = titleText.value;
-    // const year_text = yearText.value;
-    // const hour_text = hourText.value;
-    // const comment_text = commentText.value;
-    // console.log(typeof title_text)
-
-    // const data = {
-    //     title: title_text,
-    //     year: year_text,
-    //     hour: hour_text,
-    //     done: false,//判斷有無打勾
-    //     file: false,//判斷有無上傳檔案
-    //     star: false,//判斷星星
-    //     comment: comment_text,
-    // }
+    const title_text = titleText.value;
+    const year_text = yearText.value;
+    const hour_text = hourText.value;
+    const comment_text = commentText.value;
+    // console.log(comment_text)
 
     const data = {
-        title: titleText.value,
-        year: yearText.value,
-        hour: hourText.value,
+        title: title_text,
+        year: year_text,
+        hour: hour_text,
         done: false,//判斷有無打勾
         file: false,//判斷有無上傳檔案
         star: false,//判斷星星
-        comment: commentText.value,
-
-    };
-
+        comment: comment_text,
+    }
     datas.push(data);
     console.table(datas)
 
@@ -152,9 +131,6 @@ function pushData(e) {
     // 打勾處理
     tickProcessing();
 
-    // 鉛筆處理
-    penProcessing();
-
     // 清空輸入欄位的文字
     myForm.reset();
 
@@ -164,7 +140,7 @@ function displayData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
         return `
-        <div class="recordContainer" >
+        <div class="recordContainer">
             <div class="messageContainer">
                 <div>
                     <input type="checkbox" name="tick">
@@ -173,12 +149,12 @@ function displayData(datas, datalist) {
                 </div>
                 <div>
                     <i class="fas fa-star star"></i>
-                    <i class="fas fa-pen pen" data-penid="${i}"></i>
+                    <i class="fas fa-pen pen"></i>
                 </div>
             </div>
             <div class="mgIconWrapper">
                 <i class="far fa-calendar-alt messageIcon"></i>
-                <span class="dateStamp">${data.year}</span>
+                <span class="dateStamp">123</span>
                 <i class="far fa-file messageIcon"></i>
                 <i class="far fa-comment-dots messageIcon"></i>
             </div>
@@ -199,13 +175,13 @@ function starProcessing() {
     chooseStar.forEach((starData, index) => {
         // console.log(starData)
         starData.addEventListener('click', function () {
-
-            // 資料更新處理未做
-
-            // 渲染畫面處理
+            // console.log("ddddddd");
             starData.classList.toggle('starColor');
-            RecordContainer[index - 1].classList.toggle('recordContainerColor');
 
+            // RecordContainer.forEach((containerData, index) => {
+            // TitleContainer.classList.toggle('titleContainerColor');
+            RecordContainer[index - 1].classList.toggle('recordContainerColor');
+            // })
         })
     })
 }
@@ -217,86 +193,8 @@ function tickProcessing() {
 
     Ticks.forEach((tick, index) => {
         tick.addEventListener('click', function () {
-
-            // 資料更新處理未做
-
-            // 渲染畫面處理
             TypeTitle[index].classList.toggle('typeTitleLine');
         })
     })
 }
-
-function penProcessing() {
-    let pens = document.querySelectorAll('#plates .pen');
-    pens.forEach((pen, index) => {
-        pen.addEventListener('click', function (e) {
-            var penid = e.target.dataset.penid;
-            // console.log(penid);
-            // console.log(datas[0]);
-            main = document.getElementById('mainWrapper');
-            main.innerHTML = `<div class="myFormWrapper">
-            <form id="myForm">
-                <div class="titleContainer">
-                    <div>
-                        <input type="checkbox" name="tick">
-                        <input id="title-text" class="typeTitle" type="text" value="${datas[penid].title}">
-                    </div>
-                    <div>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-pen pen"></i>
-                    </div>
-                </div>
-                <div class="contentWrapper">
-                    <div class="datelineWrapper">
-                        <div>
-                            <i class="far fa-calendar-alt contentIcon"></i>
-                            <span class="contentTitle">Deadline</span>
-                        </div>
-                        <div class="dateWrapper">
-                            <input id="year-text" class="deadlineInput" type="date" value="${datas[penid].year}">
-                            <input id="hour-text" class="deadlineInput" type="time" value="${datas[penid].hour}">
-                        </div>
-                    </div>
-            
-                    <div class="fileWrapper">
-                        <div>
-                            <i class="far fa-file contentIcon"></i>
-                            <span class="contentTitle">File</span>
-                        </div>
-                        <div>
-                            <input class="plus" type="submit" value="+">
-                        </div>
-                    </div>
-            
-                    <div class="commentWrapper">
-                        <div>
-                            <i class="far fa-comment-dots contentIcon"></i>
-                            <span class="contentTitle">Comment</span>
-                        </div>
-                        <div>
-            
-                            <input id="comment-text" class="memoInput" type="text" value="${datas[penid].comment}">
-            
-                        </div>
-                    </div>
-                </div>
-                <div class="buttonWrapper">
-                    <input class="cancleinput" type="submit" value="✕ Cancle">
-                    <input class="addinput" type="submit" value="+ Save">
-                </div>
-            </form>
-            </div>`;
-
-            // 刪除按鈕
-            cancleInput = document.querySelector('.cancleinput');
-            cancleInput.addEventListener('click', deleteData);
-
-            // 存取按鈕
-            // 1.把修改的資料存入
-            // 2.渲染畫面
-        })
-
-    })
-
-}//penProcessing
 
