@@ -271,9 +271,27 @@ input[type=checkbox] {
 .pen {
   font-size: 24px;
   color: #4a90e2;
+  cursor: pointer;
 }
 @media (max-width: 360px) {
   .pen {
+    font-size: 17px;
+  }
+}
+
+.trash {
+  font-size: 24px;
+  color: #4a90e2;
+  cursor: pointer;
+  margin-right: 30px;
+}
+@media (max-width: 660px) {
+  .trash {
+    margin-right: 0;
+  }
+}
+@media (max-width: 360px) {
+  .trash {
     font-size: 17px;
   }
 }

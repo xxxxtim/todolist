@@ -39,6 +39,7 @@ addTask.addEventListener('click', () => {
         </div>
         <div>
             <i class="fas fa-star star"></i>
+            <i class="fas fa-trash-alt trash"></i>
             <i class="fas fa-pen pen"></i>
         </div>
     </div>
@@ -113,22 +114,7 @@ function deleteData() {
 function pushData(e) {
     // 加上preventDefault()避免每次submit都會重整網頁
     e.preventDefault();
-    //選取輸入框的輸入文字
-    // const title_text = titleText.value;
-    // const year_text = yearText.value;
-    // const hour_text = hourText.value;
-    // const comment_text = commentText.value;
-    // console.log(typeof title_text)
 
-    // const data = {
-    //     title: title_text,
-    //     year: year_text,
-    //     hour: hour_text,
-    //     done: false,//判斷有無打勾
-    //     file: false,//判斷有無上傳檔案
-    //     star: false,//判斷星星
-    //     comment: comment_text,
-    // }
 
     const data = {
         title: titleText.value,
@@ -147,13 +133,16 @@ function pushData(e) {
     // 顯示程式
     displayData(datas, datalist);
 
-    // 星星處理
-    starProcessing();
-    // 打勾處理
-    tickProcessing();
+    // // 星星處理
+    // starProcessing();
+    // // 打勾處理
+    // tickProcessing();
 
-    // 鉛筆處理
-    penProcessing();
+    // // 鉛筆處理
+    // penProcessing();
+
+    // // 刪除處理
+    // deleteProcessing();
 
     // 清空輸入欄位的文字
     myForm.reset();
@@ -173,6 +162,7 @@ function displayData(datas, datalist) {
                 </div>
                 <div>
                     <i class="fas fa-star star"></i>
+                    <i class="fas fa-trash-alt trash" data-trashid="${i}"></i>
                     <i class="fas fa-pen pen" data-penid="${i}"></i>
                 </div>
             </div>
@@ -185,8 +175,18 @@ function displayData(datas, datalist) {
         </div>
 
 `;
-
     })
+    // 星星處理
+    starProcessing();
+    // 打勾處理
+    tickProcessing();
+
+    // 鉛筆處理
+    penProcessing();
+
+    // 刪除處理
+    deleteProcessing();
+
 }
 
 // 星星處理
@@ -225,7 +225,7 @@ function tickProcessing() {
         })
     })
 }
-
+// 鉛筆處理
 function penProcessing() {
     let pens = document.querySelectorAll('#plates .pen');
     pens.forEach((pen, index) => {
@@ -243,6 +243,7 @@ function penProcessing() {
                     </div>
                     <div>
                         <i class="fas fa-star star"></i>
+                        <i class="fas fa-trash-alt trash"></i>
                         <i class="fas fa-pen pen"></i>
                     </div>
                 </div>
@@ -287,16 +288,47 @@ function penProcessing() {
             </form>
             </div>`;
 
-            // 刪除按鈕
+            // cancle按鈕
             cancleInput = document.querySelector('.cancleinput');
             cancleInput.addEventListener('click', deleteData);
 
             // 存取按鈕
-            // 1.把修改的資料存入
-            // 2.渲染畫面
+            addInput = document.querySelector('.addinput');
+            addInput.addEventListener('click', (evt) => {
+                // 避免網頁重整
+                evt.preventDefault();
+                // 抓取修改資料
+                titleText = document.getElementById('title-text');
+                yearText = document.getElementById('year-text');
+                hourText = document.getElementById('hour-text');
+                commentText = document.getElementById('comment-text');
+                datalist = document.getElementById('plates');
+                // 資料寫入
+                datas[penid].title = titleText.value;
+                datas[penid].year = yearText.value;
+                datas[penid].hour = hourText.value;
+                datas[penid].comment = commentText.value;
+                console.table(datas);
+                // 渲染畫面
+                displayData(datas, datalist);
+
+
+            });
         })
 
     })
 
 }//penProcessing
 
+function deleteProcessing() {
+    let trashs = document.querySelectorAll('#plates .trash');
+    trashs.forEach((trash, index) => {
+        trash.addEventListener('click', function (e) {
+            var trashid = e.target.dataset.trashid;
+            // console.log(trashid);
+            datas.splice(trashid, 1);
+            displayData(datas, datalist);
+        })
+
+    })
+}//deleteProcessing

@@ -19,6 +19,19 @@
 .pen {
     font-size: 24px;
     color: #4a90e2;
+    cursor: pointer;
+    @include small {
+        font-size: 17px;
+    }
+}
+.trash {
+    font-size: 24px;
+    color: #4a90e2;
+    cursor: pointer;
+    margin-right: 30px;
+    @include medium {
+        margin-right: 0;
+    }
     @include small {
         font-size: 17px;
     }
