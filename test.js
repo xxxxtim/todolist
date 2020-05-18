@@ -6,6 +6,8 @@ var hourText;
 var commentText;
 var datalist;
 var main;
+
+var starStaus = false;
 // console.log(main)
 
 
@@ -13,6 +15,7 @@ var main;
 var addTask;
 var addInput;
 var cancleInput;
+var starBtn;
 // object
 var datas = [];
 var data = {
@@ -92,40 +95,63 @@ addTask.addEventListener('click', () => {
     commentText = document.getElementById('comment-text');
     datalist = document.getElementById('plates');
     main = document.getElementById('mainWrapper');
-    // 按按鈕 彈出表格
+    // 按星星
+    starBtn = main.querySelector('.star');
+    starBtn.addEventListener('click', starBtnProcessing);
+    // 按按鈕 彈出下方表格
     addInput = document.querySelector('.addinput');
     addInput.addEventListener('click', pushData);
-    // 按按鈕 刪除表格
+    // 按按鈕 刪除下方表格
     cancleInput = document.querySelector('.cancleinput');
-    cancleInput.addEventListener('click', deleteData)
+    cancleInput.addEventListener('click', deleteData);
+
+
+
 });
 
-// 按按鈕 刪除表格
+// 第1顆星星
+function starBtnProcessing() {
+    let RecordContainer = main.querySelector('.titleContainer');
+    // 資料更新未做
+    starStaus = !starStaus;
+    // 渲染頁面
+    starBtn.classList.toggle('starColor');
+    RecordContainer.classList.toggle('recordContainerColor');
+    // console.log(RecordContainer);
+}
+
+
+
+// 按按鈕 刪除下方表格
 function deleteData() {
     main = document.getElementById('mainWrapper');
     main.innerHTML
         = ``;
 }
-
-
-
-
-// 按按鈕 彈出表格
+// 按按鈕 彈出下方表格
 function pushData(e) {
     // 加上preventDefault()避免每次submit都會重整網頁
     e.preventDefault();
 
 
-    const data = {
+    data = {
         title: titleText.value,
         year: yearText.value,
         hour: hourText.value,
         done: false,//判斷有無打勾
         file: false,//判斷有無上傳檔案
-        star: false,//判斷星星
+        star: starStaus,//判斷星星
         comment: commentText.value,
 
     };
+
+    // data.title = titleText.value;
+    // data.year = yearText.value;
+    // data.hour = hourText.value;
+    // data.done = false;//判斷有無打勾
+    // data.file = false;//判斷有無上傳檔案
+    // // data.star = false;//判斷星星
+    // data.comment = commentText.value;
 
     datas.push(data);
     console.table(datas)
@@ -133,18 +159,7 @@ function pushData(e) {
     // 顯示程式
     displayData(datas, datalist);
 
-    // // 星星處理
-    // starProcessing();
-    // // 打勾處理
-    // tickProcessing();
 
-    // // 鉛筆處理
-    // penProcessing();
-
-    // // 刪除處理
-    // deleteProcessing();
-
-    // 清空輸入欄位的文字
     myForm.reset();
 
 }
@@ -152,8 +167,16 @@ function pushData(e) {
 function displayData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
+        let starColor = "";
+        let recordContainerColor = "";
+        if (data.star === true) {
+            starColor = 'starColor';
+            recordContainerColor = 'recordContainerColor';
+        }
+
+
         return `
-        <div class="recordContainer" >
+        <div class="recordContainer ${recordContainerColor}" >
             <div class="messageContainer">
                 <div>
                     <input type="checkbox" name="tick">
@@ -161,7 +184,7 @@ function displayData(datas, datalist) {
 
                 </div>
                 <div>
-                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star ${starColor}" data-starid="${i}"></i>
                     <i class="fas fa-trash-alt trash" data-trashid="${i}"></i>
                     <i class="fas fa-pen pen" data-penid="${i}"></i>
                 </div>
@@ -191,21 +214,27 @@ function displayData(datas, datalist) {
 
 // 星星處理
 function starProcessing() {
-    const chooseStar = document.querySelectorAll('.star');
+    // const chooseStar = document.querySelectorAll('.star');
     const RecordContainer = document.querySelectorAll('.recordContainer');
     const TitleContainer = document.querySelector('.titleContainer');
     // console.log(chooseStar);
+    let stars = document.querySelectorAll('#plates .star');
 
-    chooseStar.forEach((starData, index) => {
+    stars.forEach((star, index) => {
         // console.log(starData)
-        starData.addEventListener('click', function () {
-
-            // 資料更新處理未做
+        star.addEventListener('click', function (e) {
+            // 資料更新處理
+            let starid = e.target.dataset.starid;
+            datas[starid].star = !datas[starid].star;
+            console.table(datas);
 
             // 渲染畫面處理
-            starData.classList.toggle('starColor');
-            RecordContainer[index - 1].classList.toggle('recordContainerColor');
+            // if (datas[starid].star === true) {
+            //     star.classList.toggle('starColor');
+            //     RecordContainer[starid].classList.toggle('recordContainerColor');
+            // }
 
+            displayData(datas, datalist);
         })
     })
 }
@@ -230,19 +259,25 @@ function penProcessing() {
     let pens = document.querySelectorAll('#plates .pen');
     pens.forEach((pen, index) => {
         pen.addEventListener('click', function (e) {
-            var penid = e.target.dataset.penid;
+            let starColor = "";
+            let recordContainerColor = "";
+            let penid = e.target.dataset.penid;
+            if (datas[penid].star === true) {
+                starColor = 'starColor';
+                recordContainerColor = 'recordContainerColor';
+            }
             // console.log(penid);
             // console.log(datas[0]);
             main = document.getElementById('mainWrapper');
             main.innerHTML = `<div class="myFormWrapper">
             <form id="myForm">
-                <div class="titleContainer">
+                <div class="titleContainer ${recordContainerColor}">
                     <div>
                         <input type="checkbox" name="tick">
                         <input id="title-text" class="typeTitle" type="text" value="${datas[penid].title}">
                     </div>
                     <div>
-                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star ${starColor}"></i>
                         <i class="fas fa-trash-alt trash"></i>
                         <i class="fas fa-pen pen"></i>
                     </div>
@@ -303,12 +338,16 @@ function penProcessing() {
                 hourText = document.getElementById('hour-text');
                 commentText = document.getElementById('comment-text');
                 datalist = document.getElementById('plates');
+
                 // 資料寫入
                 datas[penid].title = titleText.value;
                 datas[penid].year = yearText.value;
                 datas[penid].hour = hourText.value;
                 datas[penid].comment = commentText.value;
+
                 console.table(datas);
+
+
                 // 渲染畫面
                 displayData(datas, datalist);
 
@@ -319,6 +358,7 @@ function penProcessing() {
     })
 
 }//penProcessing
+
 
 function deleteProcessing() {
     let trashs = document.querySelectorAll('#plates .trash');
