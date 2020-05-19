@@ -7,6 +7,8 @@ var commentText;
 var datalist;
 var main;
 
+
+
 var starStaus = false;
 // console.log(main)
 
@@ -95,8 +97,9 @@ addTask.addEventListener('click', () => {
     commentText = document.getElementById('comment-text');
     datalist = document.getElementById('plates');
     main = document.getElementById('mainWrapper');
+
     // 按星星
-    starBtn = main.querySelector('.star');
+    starBtn = document.querySelector('.titleContainer .star');
     starBtn.addEventListener('click', starBtnProcessing);
     // 按按鈕 彈出下方表格
     addInput = document.querySelector('.addinput');
@@ -111,13 +114,13 @@ addTask.addEventListener('click', () => {
 
 // 第1顆星星
 function starBtnProcessing() {
-    let RecordContainer = main.querySelector('.titleContainer');
+    let titleContainer = document.querySelector('.titleContainer');
     // 資料更新未做
     starStaus = !starStaus;
     // 渲染頁面
     starBtn.classList.toggle('starColor');
-    RecordContainer.classList.toggle('recordContainerColor');
-    // console.log(RecordContainer);
+    titleContainer.classList.toggle('recordContainerColor');
+    console.log('yooooooo');
 }
 
 
@@ -145,13 +148,7 @@ function pushData(e) {
 
     };
 
-    // data.title = titleText.value;
-    // data.year = yearText.value;
-    // data.hour = hourText.value;
-    // data.done = false;//判斷有無打勾
-    // data.file = false;//判斷有無上傳檔案
-    // // data.star = false;//判斷星星
-    // data.comment = commentText.value;
+
 
     datas.push(data);
     console.table(datas)
@@ -327,6 +324,11 @@ function penProcessing() {
             cancleInput = document.querySelector('.cancleinput');
             cancleInput.addEventListener('click', deleteData);
 
+            // 按星星
+            starBtn = document.querySelector('.titleContainer .star');
+            console.log(starBtn);
+            starBtn.addEventListener('click', starBtnProcessing);
+
             // 存取按鈕
             addInput = document.querySelector('.addinput');
             addInput.addEventListener('click', (evt) => {
@@ -339,11 +341,14 @@ function penProcessing() {
                 commentText = document.getElementById('comment-text');
                 datalist = document.getElementById('plates');
 
+
+
                 // 資料寫入
                 datas[penid].title = titleText.value;
                 datas[penid].year = yearText.value;
                 datas[penid].hour = hourText.value;
                 datas[penid].comment = commentText.value;
+                datas[penid].star = starStaus;
 
                 console.table(datas);
 
