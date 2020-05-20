@@ -8,16 +8,17 @@ var datalist;
 var main;
 
 
-
-var starStaus = false;
-// console.log(main)
-
+// 第一個星星狀態
+var starStaus;
+// 第一個打勾狀態
+var checkStatus;
 
 // button
 var addTask;
 var addInput;
 var cancleInput;
-var starBtn;
+var starBtn;//星星
+var checkBtn;//打勾
 // object
 var datas = [];
 var data = {
@@ -31,7 +32,11 @@ var data = {
 }
 
 addTask = document.querySelector('.addTaskButton');
-addTask.addEventListener('click', () => {
+addTask.addEventListener('click', mainTable);
+
+
+// 上方填空欄
+function mainTable() {
     // console.log(main)
     main = document.getElementById('mainWrapper');
     main.innerHTML
@@ -98,24 +103,36 @@ addTask.addEventListener('click', () => {
     datalist = document.getElementById('plates');
     main = document.getElementById('mainWrapper');
 
-    // 按星星
+    starStaus = false;
+    checkStatus = false;
+
+
+
+
+    // 按第一個星星
     starBtn = document.querySelector('.titleContainer .star');
     starBtn.addEventListener('click', starBtnProcessing);
-    // 按按鈕 彈出下方表格
+    // 第一個打勾
+    checkBtn = document.querySelector('.titleContainer [name="tick"]');
+    checkBtn.addEventListener('click', checkBtnProcessing);
+
+
+
+    // 按按鈕 彈出下方表格 並且重新reset上方表格
     addInput = document.querySelector('.addinput');
     addInput.addEventListener('click', pushData);
     // 按按鈕 刪除下方表格
     cancleInput = document.querySelector('.cancleinput');
     cancleInput.addEventListener('click', deleteData);
 
+}
 
 
-});
 
 // 第1顆星星
 function starBtnProcessing() {
     let titleContainer = document.querySelector('.titleContainer');
-    // 資料更新未做
+    // 資料更新
     starStaus = !starStaus;
     // 渲染頁面
     starBtn.classList.toggle('starColor');
@@ -123,6 +140,15 @@ function starBtnProcessing() {
     console.log('yooooooo');
 }
 
+// 第一個打勾
+function checkBtnProcessing() {
+    let typeTitle = document.querySelector('.titleContainer .typeTitle');
+    // 資料更新
+    checkStatus = !checkStatus;
+    // 渲染頁面
+    typeTitle.classList.toggle('typeTitleLine');
+    console.log('loooooooo');
+}
 
 
 // 按按鈕 刪除下方表格
@@ -141,7 +167,7 @@ function pushData(e) {
         title: titleText.value,
         year: yearText.value,
         hour: hourText.value,
-        done: false,//判斷有無打勾
+        done: checkStatus,//判斷有無打勾
         file: false,//判斷有無上傳檔案
         star: starStaus,//判斷星星
         comment: commentText.value,
@@ -153,7 +179,10 @@ function pushData(e) {
     datas.push(data);
     console.table(datas)
 
-    // 顯示程式
+
+    // 重新渲染方表格
+    mainTable();
+    // 顯示下方表格程式
     displayData(datas, datalist);
 
 
@@ -164,20 +193,27 @@ function pushData(e) {
 function displayData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
+        // 星星處理
         let starColor = "";
         let recordContainerColor = "";
         if (data.star === true) {
             starColor = 'starColor';
             recordContainerColor = 'recordContainerColor';
         }
-
+        // 打勾處理
+        let typeTitleLine = "";
+        let checked = "";
+        if (data.done === true) {
+            checked = 'checked';
+            typeTitleLine = 'typeTitleLine';
+        }
 
         return `
         <div class="recordContainer ${recordContainerColor}" >
             <div class="messageContainer">
                 <div>
-                    <input type="checkbox" name="tick">
-                    <span class="typeTitle"> ${data.title}</span>
+                    <input type="checkbox" name="tick" data-checkid="${i}" ${checked}>
+                    <span class="typeTitle ${typeTitleLine}"> ${data.title}</span>
 
                 </div>
                 <div>
@@ -235,19 +271,22 @@ function starProcessing() {
         })
     })
 }
-
 // 打勾處理
 function tickProcessing() {
-    const Ticks = document.getElementsByName("tick");
-    const TypeTitle = document.querySelectorAll('.typeTitle')
+    let Ticks = document.getElementsByName("tick");
+    // const TypeTitle = document.querySelectorAll('.typeTitle');
 
     Ticks.forEach((tick, index) => {
-        tick.addEventListener('click', function () {
+        tick.addEventListener('click', function (e) {
 
-            // 資料更新處理未做
+            // 資料更新處理
+            let checkid = e.target.dataset.checkid;
+            datas[checkid].done = !datas[checkid].done;
+            console.table(datas);
 
             // 渲染畫面處理
-            TypeTitle[index].classList.toggle('typeTitleLine');
+            // TypeTitle[index].classList.toggle('typeTitleLine');
+            displayData(datas, datalist);
         })
     })
 }
@@ -256,22 +295,28 @@ function penProcessing() {
     let pens = document.querySelectorAll('#plates .pen');
     pens.forEach((pen, index) => {
         pen.addEventListener('click', function (e) {
+            let penid = e.target.dataset.penid;
+            // 星星處理
             let starColor = "";
             let recordContainerColor = "";
-            let penid = e.target.dataset.penid;
             if (datas[penid].star === true) {
                 starColor = 'starColor';
                 recordContainerColor = 'recordContainerColor';
             }
-            // console.log(penid);
-            // console.log(datas[0]);
+            // 打勾處理
+            let typeTitleLine = "";
+            let checked = "";
+            if (datas[penid].done === true) {
+                checked = 'checked';
+                typeTitleLine = 'typeTitleLine';
+            }
             main = document.getElementById('mainWrapper');
             main.innerHTML = `<div class="myFormWrapper">
             <form id="myForm">
                 <div class="titleContainer ${recordContainerColor}">
                     <div>
-                        <input type="checkbox" name="tick">
-                        <input id="title-text" class="typeTitle" type="text" value="${datas[penid].title}">
+                        <input type="checkbox" name="tick"${checked}>
+                        <input id="title-text" class="typeTitle  ${typeTitleLine}" type="text" value="${datas[penid].title}">
                     </div>
                     <div>
                         <i class="fas fa-star star ${starColor}"></i>
@@ -324,11 +369,28 @@ function penProcessing() {
             cancleInput = document.querySelector('.cancleinput');
             cancleInput.addEventListener('click', deleteData);
 
-            // 按星星
+            // // 按第一個星星
             starBtn = document.querySelector('.titleContainer .star');
-            console.log(starBtn);
-            starBtn.addEventListener('click', starBtnProcessing);
+            starBtn.addEventListener('click', () => {
+                let titleContainer = document.querySelector('.titleContainer');
+                datas[penid].star = !datas[penid].star;
 
+                // 渲染頁面
+                starBtn.classList.toggle('starColor');
+                titleContainer.classList.toggle('recordContainerColor');
+            });
+
+            // // 按第一個打勾
+            checkBtn = document.querySelector('.titleContainer [name="tick"]');
+            checkBtn.addEventListener('click', () => {
+                let typeTitle = document.querySelector('.titleContainer .typeTitle');
+                datas[penid].done = !datas[penid].done;
+
+                // 渲染頁面
+                typeTitle.classList.toggle('typeTitleLine');
+            });
+
+            console.table(datas);
             // 存取按鈕
             addInput = document.querySelector('.addinput');
             addInput.addEventListener('click', (evt) => {
@@ -343,18 +405,25 @@ function penProcessing() {
 
 
 
+
+
                 // 資料寫入
                 datas[penid].title = titleText.value;
                 datas[penid].year = yearText.value;
                 datas[penid].hour = hourText.value;
                 datas[penid].comment = commentText.value;
-                datas[penid].star = starStaus;
+                // datas[penid].star = starStaus;
+                // datas[penid].done = checkStatus;
+
+
 
                 console.table(datas);
 
 
                 // 渲染畫面
                 displayData(datas, datalist);
+
+                mainTable();
 
 
             });
