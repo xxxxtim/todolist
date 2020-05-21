@@ -488,11 +488,17 @@ function deleteProcessing() {
 // progress 跳頁面
 var inProgress = document.querySelector('#inProgress');
 inProgress.addEventListener('click', function () {
-    let arrOfProcess = datas.filter(function (data) {
+    datalist = document.getElementById('plates');
+    let arrayOfStar = datas.filter(function (data) {
         return data.star === true;
 
     })
-    displayData(arrOfProcess, datalist);
+    let arrayOfProcess = datas.filter(function (data) {
+        return (data.star === false) && (data.done === false);
+
+    })
+    arrayOfProcess = [...arrayOfStar, ...arrayOfProcess];
+    renderData(arrayOfProcess, datalist);
     deleteData();
 
 })
@@ -500,11 +506,81 @@ inProgress.addEventListener('click', function () {
 // complete 跳頁面
 var complete = document.querySelector('#complete');
 complete.addEventListener('click', function () {
+    datalist = document.getElementById('plates');
     let arrOfComplete = datas.filter(function (data) {
         return data.done === true;
 
     })
-    displayData(arrOfComplete, datalist);
+    renderData(arrOfComplete, datalist);
     deleteData();
 
 })
+
+
+function renderData(datas, datalist) {
+    console.log(datas)
+    datalist.innerHTML = datas.map((data, i) => {
+        // 星星處理
+        let starColor = "";
+        let recordContainerColor = "";
+        if (data.star === true) {
+            starColor = 'starColor';
+            recordContainerColor = 'recordContainerColor';
+        }
+        // 打勾處理
+        let typeTitleLine = "";
+        let checked = "";
+        if (data.done === true) {
+            checked = 'checked';
+            typeTitleLine = 'typeTitleLine';
+        }
+
+        // 判斷是否為空白或空字串
+        // 是否有流言
+        let messageIcon = '';
+        if (!isNull(data.comment)) {
+            messageIcon = '<i class="far fa-comment-dots messageIcon"></i>';
+        }
+        // 是否有輸入時間
+        let calendar = '';
+        if ((!isNull(data.year)) || (!isNull(data.hour))) {
+            calendar = '<i class="far fa-calendar-alt messageIcon"></i>'
+        }
+
+        return `
+        <div class="recordContainer ${recordContainerColor}" >
+            <div class="messageContainer">
+                <div>
+                    <input type="checkbox" name="tick" data-checkid="${i}" ${checked}>
+                    <span class="typeTitle ${typeTitleLine}"> ${data.title}</span>
+
+                </div>
+                <div>
+                    <i class="fas fa-star star ${starColor}" data-starid="${i}"></i>
+                    <i class="fas fa-trash-alt trash" data-trashid="${i}"></i>
+                    <i class="fas fa-pen pen" data-penid="${i}"></i>
+                </div>
+            </div>
+            <div class="mgIconWrapper">
+                ${calendar}
+                <span class="dateStamp">${data.year}</span>
+                <span class="dateStamp">${data.hour}</span>
+                <i class="far fa-file messageIcon"></i>
+                ${messageIcon}
+            </div>
+        </div>
+
+`;
+    })
+    // 星星處理
+    // starProcessing();
+    // 打勾處理
+    // tickProcessing();
+
+    // 鉛筆處理
+    // penProcessing();
+
+    // 刪除處理
+    deleteProcessing();
+
+}
