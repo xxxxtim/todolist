@@ -31,6 +31,16 @@ var data = {
     comment: "",
 }
 
+var myTask = document.querySelector('#myTask');
+myTask.addEventListener('click', () => {
+    datalist = document.getElementById('plates');
+    datalist.innerHTML = '';
+
+    mainTable();
+
+})
+
+
 addTask = document.querySelector('.addTaskButton');
 addTask.addEventListener('click', mainTable);
 
@@ -180,7 +190,7 @@ function pushData(e) {
     console.table(datas)
 
 
-    // 重新渲染方表格
+    // 重新渲染上方表格
     mainTable();
     // 顯示下方表格程式
     displayData(datas, datalist);
@@ -189,6 +199,18 @@ function pushData(e) {
     myForm.reset();
 
 }
+
+// 判斷是否為空白或空字串
+function isNull(str) {
+    if (str == "") return true;
+    var regu = "^[ ] $";
+    var re = new RegExp(regu);
+    return re.test(str);
+}
+
+
+
+
 // 顯示程式
 function displayData(datas, datalist) {
     console.log(datas)
@@ -208,6 +230,18 @@ function displayData(datas, datalist) {
             typeTitleLine = 'typeTitleLine';
         }
 
+        // 判斷是否為空白或空字串
+        // 是否有流言
+        let messageIcon = '';
+        if (!isNull(data.comment)) {
+            messageIcon = '<i class="far fa-comment-dots messageIcon"></i>';
+        }
+        // 是否有輸入時間
+        let calendar = '';
+        if ((!isNull(data.year)) || (!isNull(data.hour))) {
+            calendar = '<i class="far fa-calendar-alt messageIcon"></i>'
+        }
+
         return `
         <div class="recordContainer ${recordContainerColor}" >
             <div class="messageContainer">
@@ -223,10 +257,11 @@ function displayData(datas, datalist) {
                 </div>
             </div>
             <div class="mgIconWrapper">
-                <i class="far fa-calendar-alt messageIcon"></i>
+                ${calendar}
                 <span class="dateStamp">${data.year}</span>
+                <span class="dateStamp">${data.hour}</span>
                 <i class="far fa-file messageIcon"></i>
-                <i class="far fa-comment-dots messageIcon"></i>
+                ${messageIcon}
             </div>
         </div>
 
@@ -446,3 +481,30 @@ function deleteProcessing() {
 
     })
 }//deleteProcessing
+
+
+
+
+// progress 跳頁面
+var inProgress = document.querySelector('#inProgress');
+inProgress.addEventListener('click', function () {
+    let arrOfProcess = datas.filter(function (data) {
+        return data.star === true;
+
+    })
+    displayData(arrOfProcess, datalist);
+    deleteData();
+
+})
+
+// complete 跳頁面
+var complete = document.querySelector('#complete');
+complete.addEventListener('click', function () {
+    let arrOfComplete = datas.filter(function (data) {
+        return data.done === true;
+
+    })
+    displayData(arrOfComplete, datalist);
+    deleteData();
+
+})
