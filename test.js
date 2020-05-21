@@ -34,9 +34,9 @@ var data = {
 var myTask = document.querySelector('#myTask');
 myTask.addEventListener('click', () => {
     datalist = document.getElementById('plates');
-    datalist.innerHTML = '';
+    // datalist.innerHTML = '';
 
-    mainTable();
+    displayData(datas, datalist);
 
 })
 
