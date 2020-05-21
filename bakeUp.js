@@ -1,31 +1,30 @@
 
-var myForm;
-var titleText;
-var yearText;
-var hourText;
-var commentText;
+var myForm = document.getElementById('myForm');
+var titleText = document.getElementById('title-text');
+var yearText = document.getElementById('year-text');
+var hourText = document.getElementById('hour-text');
+var commentText = document.getElementById('comment-text');
 var datalist;
-var main;
+var main = document.getElementById('mainWrapper');
 // console.log(main)
 
 
 // button
-var addTask;
-var addInput;
-var cancleInput;
+var addTask = document.querySelector('.addTaskButton')
+var addInput = document.querySelector('.addinput');
+var cancleInput = document.querySelector('.cancleinput');
 
 var datas = [];
 
-addTask = document.querySelector('.addTaskButton');
+
 addTask.addEventListener('click', () => {
-    // console.log(main)
-    main = document.getElementById('mainWrapper');
+    console.log(main)
     main.innerHTML
         = `<div class="myFormWrapper">
 <form id="myForm">
     <div class="titleContainer">
         <div>
-            <input type="checkbox" name="tick">
+            <input type="checkbox">
             <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
         </div>
         <div>
@@ -82,25 +81,18 @@ addTask.addEventListener('click', () => {
     commentText = document.getElementById('comment-text');
     datalist = document.getElementById('plates');
     main = document.getElementById('mainWrapper');
-    // 按按鈕 彈出表格
-    addInput = document.querySelector('.addinput');
+
+    var addInput = document.querySelector('.addinput');
+    var cancleInput = document.querySelector('.cancleinput');
+
+    var datas = [];
     addInput.addEventListener('click', pushData);
-    // 按按鈕 刪除表格
-    cancleInput = document.querySelector('.cancleinput');
-    cancleInput.addEventListener('click', deleteData)
 });
 
-// 按按鈕 刪除表格
-function deleteData() {
-    main = document.getElementById('mainWrapper');
-    main.innerHTML
-        = ``;
-}
 
 
 
-
-// 按按鈕 彈出表格
+// addInput.addEventListener('click', pushData);
 function pushData(e) {
     // 加上preventDefault()避免每次submit都會重整網頁
     e.preventDefault();
@@ -126,16 +118,11 @@ function pushData(e) {
     // 顯示程式
     displayData(datas, datalist);
 
-    // 星星處理
-    starProcessing();
-    // 打勾處理
-    tickProcessing();
-
     // 清空輸入欄位的文字
     myForm.reset();
 
 }
-// 顯示程式
+
 function displayData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
@@ -143,7 +130,7 @@ function displayData(datas, datalist) {
         <div class="recordContainer">
             <div class="messageContainer">
                 <div>
-                    <input type="checkbox" name="tick">
+                    <input type="checkbox">
                     <span class="typeTitle"> ${data.title}</span>
 
                 </div>
@@ -153,8 +140,6 @@ function displayData(datas, datalist) {
                 </div>
             </div>
             <div class="mgIconWrapper">
-                <i class="far fa-calendar-alt messageIcon"></i>
-                <span class="dateStamp">123</span>
                 <i class="far fa-file messageIcon"></i>
                 <i class="far fa-comment-dots messageIcon"></i>
             </div>
@@ -164,37 +149,3 @@ function displayData(datas, datalist) {
 
     })
 }
-
-// 星星處理
-function starProcessing() {
-    const chooseStar = document.querySelectorAll('.star');
-    const RecordContainer = document.querySelectorAll('.recordContainer');
-    const TitleContainer = document.querySelector('.titleContainer');
-    // console.log(chooseStar);
-
-    chooseStar.forEach((starData, index) => {
-        // console.log(starData)
-        starData.addEventListener('click', function () {
-            // console.log("ddddddd");
-            starData.classList.toggle('starColor');
-
-            // RecordContainer.forEach((containerData, index) => {
-            // TitleContainer.classList.toggle('titleContainerColor');
-            RecordContainer[index - 1].classList.toggle('recordContainerColor');
-            // })
-        })
-    })
-}
-
-// 打勾處理
-function tickProcessing() {
-    const Ticks = document.getElementsByName("tick");
-    const TypeTitle = document.querySelectorAll('.typeTitle')
-
-    Ticks.forEach((tick, index) => {
-        tick.addEventListener('click', function () {
-            TypeTitle[index].classList.toggle('typeTitleLine');
-        })
-    })
-}
-
