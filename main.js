@@ -81,7 +81,10 @@ function mainTable() {
                 <span class="contentTitle">File</span>
             </div>
             <div>
-                <input class="plus" type="submit" value="+">
+            <label class="upload_cover">
+            <input id="upload_input" type="file">
+            <span class="upload_icon">➕</span>
+          </label>
             </div>
         </div>
 
@@ -377,7 +380,10 @@ function penProcessing() {
                             <span class="contentTitle">File</span>
                         </div>
                         <div>
-                            <input class="plus" type="submit" value="+">
+                        <label class="upload_cover">
+                        <input id="upload_input" type="file">
+                        <span class="upload_icon">➕</span>
+                      </label>
                         </div>
                     </div>
             

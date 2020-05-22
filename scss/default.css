@@ -188,15 +188,32 @@ input[type=checkbox] {
   }
 }
 
-.plus {
-  padding: 0;
-  height: 32px;
-  width: 32px;
-  color: white;
+.upload_cover {
+  position: relative;
+  text-align: center;
   cursor: pointer;
+  left: 16px;
+  top: 6px;
+}
+
+#upload_input {
+  display: none;
+}
+
+.upload_icon {
+  font-weight: bold;
   font-size: 20px;
-  margin-left: 15px;
-  margin-top: 8px;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  color: #ffffff;
+  background-color: #c8c8c8;
+  line-height: 30px;
+  border-radius: 2px;
+}
+
+.commentWrapper {
+  margin-top: 25px;
 }
 
 .dateWrapper {
