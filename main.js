@@ -21,6 +21,7 @@ var starBtn;//星星
 var checkBtn;//打勾
 // object
 var datas = [];
+var sortDatas = [];
 var data = {
     title: "",
     year: "",
@@ -164,7 +165,7 @@ function checkBtnProcessing() {
 }
 
 
-// 按按鈕 刪除下方表格
+// 按按鈕 刪除輸入表格
 function deleteData() {
     main = document.getElementById('mainWrapper');
     main.innerHTML
@@ -190,7 +191,7 @@ function pushData(e) {
 
 
     datas.push(data);
-    console.table(datas)
+    console.table(datas);
 
 
     // 重新渲染上方表格
@@ -217,6 +218,29 @@ function isNull(str) {
 // 顯示程式
 function displayData(datas, datalist) {
     console.log(datas)
+    // 把資料進行排序
+    // 1.已經完成
+    // let arrOfComplete = datas.filter(function (data) {
+    //     return data.done === true;
+
+    // });
+    // // 2.
+    // let arrayOfProcess = datas.filter(function (data) {
+    //     return data.done === false;
+    // });
+
+    // let arrayOfStar = arrayOfProcess.filter(function (data) {
+    //     return data.star === true;
+    // });
+
+    // let arrayOfNoStar = arrayOfProcess.filter(function (data) {
+    //     return data.star === false
+    // });
+
+    // sortDatas = [...arrayOfStar, ...arrayOfNoStar, ...arrOfComplete];
+    // 資料進行排序
+
+
     datalist.innerHTML = datas.map((data, i) => {
         // 星星處理
         let starColor = "";
@@ -505,6 +529,7 @@ inProgress.addEventListener('click', function () {
     })
     arrayOfProcess = [...arrayOfStar, ...arrayOfProcess];
     renderData(arrayOfProcess, datalist);
+    // 刪除輸入表格
     deleteData();
 
 })
@@ -518,6 +543,7 @@ complete.addEventListener('click', function () {
 
     })
     renderData(arrOfComplete, datalist);
+    // 刪除輸入表格
     deleteData();
 
 })
@@ -587,6 +613,6 @@ function renderData(datas, datalist) {
     // penProcessing();
 
     // 刪除處理
-    deleteProcessing();
+    // deleteProcessing();
 
 }
