@@ -21,6 +21,7 @@ var starBtn;//星星
 var checkBtn;//打勾
 // object
 var datas = [];
+// 排序後存取的array
 var sortDatas = [];
 var data = {
     title: "",
@@ -41,7 +42,7 @@ myTask.addEventListener('click', () => {
 
 })
 
-
+// myTask 跳頁面
 addTask = document.querySelector('.addTaskButton');
 addTask.addEventListener('click', mainTable);
 
@@ -191,6 +192,9 @@ function pushData(e) {
 
 
     datas.push(data);
+
+    // 進行資料排序
+    sorting()
     console.table(datas);
 
 
@@ -204,6 +208,33 @@ function pushData(e) {
 
 }
 
+// sorting
+function sorting() {
+    let arrOfComplete = datas.filter(function (data) {
+        return data.done === true;
+
+    });
+    // 2.
+    let arrayOfProcess = datas.filter(function (data) {
+        return data.done === false;
+    });
+
+    let arrayOfStar = arrayOfProcess.filter(function (data) {
+        return data.star === true;
+    });
+
+    let arrayOfNoStar = arrayOfProcess.filter(function (data) {
+        return data.star === false
+    });
+
+    datas = [...arrayOfStar, ...arrayOfNoStar, ...arrOfComplete];
+    // 資料進行排序
+
+}
+
+
+
+
 // 判斷是否為空白或空字串
 function isNull(str) {
     if (str == "") return true;
@@ -213,33 +244,9 @@ function isNull(str) {
 }
 
 
-
-
 // 顯示程式
 function displayData(datas, datalist) {
     console.log(datas)
-    // 把資料進行排序
-    // 1.已經完成
-    // let arrOfComplete = datas.filter(function (data) {
-    //     return data.done === true;
-
-    // });
-    // // 2.
-    // let arrayOfProcess = datas.filter(function (data) {
-    //     return data.done === false;
-    // });
-
-    // let arrayOfStar = arrayOfProcess.filter(function (data) {
-    //     return data.star === true;
-    // });
-
-    // let arrayOfNoStar = arrayOfProcess.filter(function (data) {
-    //     return data.star === false
-    // });
-
-    // sortDatas = [...arrayOfStar, ...arrayOfNoStar, ...arrOfComplete];
-    // 資料進行排序
-
 
     datalist.innerHTML = datas.map((data, i) => {
         // 星星處理
@@ -503,10 +510,11 @@ function deleteProcessing() {
     let trashs = document.querySelectorAll('#plates .trash');
     trashs.forEach((trash, index) => {
         trash.addEventListener('click', function (e) {
-            var trashid = e.target.dataset.trashid;
-            // console.log(trashid);
-            datas.splice(trashid, 1);
-            displayData(datas, datalist);
+            if (confirm('你確定刪除這筆資料嗎？')) {
+                var trashid = e.target.dataset.trashid;
+                datas.splice(trashid, 1);
+                displayData(datas, datalist);
+            }
         })
 
     })
@@ -519,16 +527,17 @@ function deleteProcessing() {
 var inProgress = document.querySelector('#inProgress');
 inProgress.addEventListener('click', function () {
     datalist = document.getElementById('plates');
-    let arrayOfStar = datas.filter(function (data) {
-        return data.star === true;
+    // let arrayOfStar = datas.filter(function (data) {
+    //     return data.star === true;
 
-    })
-    let arrayOfProcess = datas.filter(function (data) {
-        return (data.star === false) && (data.done === false);
+    // })
+    // let arrayOfProcess = datas.filter(function (data) {
+    //     return (data.star === false) && (data.done === false);
 
-    })
-    arrayOfProcess = [...arrayOfStar, ...arrayOfProcess];
-    renderData(arrayOfProcess, datalist);
+    // })
+    // arrayOfProcess = [...arrayOfStar, ...arrayOfProcess];
+
+    renderProgressData(datas, datalist);
     // 刪除輸入表格
     deleteData();
 
@@ -538,18 +547,18 @@ inProgress.addEventListener('click', function () {
 var complete = document.querySelector('#complete');
 complete.addEventListener('click', function () {
     datalist = document.getElementById('plates');
-    let arrOfComplete = datas.filter(function (data) {
-        return data.done === true;
+    // let arrOfComplete = datas.filter(function (data) {
+    //     return data.done === true;
 
-    })
-    renderData(arrOfComplete, datalist);
+    // })
+    renderCompleteData(datas, datalist);
     // 刪除輸入表格
     deleteData();
 
 })
 
 
-function renderData(datas, datalist) {
+function renderProgressData(datas, datalist) {
     console.log(datas)
     datalist.innerHTML = datas.map((data, i) => {
         // 星星處理
@@ -579,7 +588,10 @@ function renderData(datas, datalist) {
             calendar = '<i class="far fa-calendar-alt messageIcon"></i>'
         }
 
-        return `
+
+        if (data.done === false) {
+
+            return `
         <div class="recordContainer ${recordContainerColor}" >
             <div class="messageContainer">
                 <div>
@@ -603,16 +615,96 @@ function renderData(datas, datalist) {
         </div>
 
 `;
+        }
+        else {
+            return ``;
+        }
     })
     // 星星處理
-    // starProcessing();
+    starProcessing();
     // 打勾處理
-    // tickProcessing();
+    tickProcessing();
 
     // 鉛筆處理
-    // penProcessing();
+    penProcessing();
 
     // 刪除處理
-    // deleteProcessing();
+    deleteProcessing();
+
+}
+
+
+function renderCompleteData(datas, datalist) {
+    console.log(datas)
+    datalist.innerHTML = datas.map((data, i) => {
+        // 星星處理
+        let starColor = "";
+        let recordContainerColor = "";
+        if (data.star === true) {
+            starColor = 'starColor';
+            recordContainerColor = 'recordContainerColor';
+        }
+        // 打勾處理
+        let typeTitleLine = "";
+        let checked = "";
+        if (data.done === true) {
+            checked = 'checked';
+            typeTitleLine = 'typeTitleLine';
+        }
+
+        // 判斷是否為空白或空字串
+        // 是否有流言
+        let messageIcon = '';
+        if (!isNull(data.comment)) {
+            messageIcon = '<i class="far fa-comment-dots messageIcon"></i>';
+        }
+        // 是否有輸入時間
+        let calendar = '';
+        if ((!isNull(data.year)) || (!isNull(data.hour))) {
+            calendar = '<i class="far fa-calendar-alt messageIcon"></i>'
+        }
+
+
+        if (data.done === true) {
+
+            return `
+        <div class="recordContainer ${recordContainerColor}" >
+            <div class="messageContainer">
+                <div>
+                    <input type="checkbox" name="tick" data-checkid="${i}" ${checked}>
+                    <span class="typeTitle ${typeTitleLine}"> ${data.title}</span>
+
+                </div>
+                <div>
+                    <i class="fas fa-star star ${starColor}" data-starid="${i}"></i>
+                    <i class="fas fa-trash-alt trash" data-trashid="${i}"></i>
+                    <i class="fas fa-pen pen" data-penid="${i}"></i>
+                </div>
+            </div>
+            <div class="mgIconWrapper">
+                ${calendar}
+                <span class="dateStamp">${data.year}</span>
+                <span class="dateStamp">${data.hour}</span>
+                <i class="far fa-file messageIcon"></i>
+                ${messageIcon}
+            </div>
+        </div>
+
+`;
+        }
+        else {
+            return ``;
+        }
+    })
+    // 星星處理
+    starProcessing();
+    // 打勾處理
+    tickProcessing();
+
+    // 鉛筆處理
+    penProcessing();
+
+    // 刪除處理
+    deleteProcessing();
 
 }
