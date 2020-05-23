@@ -510,10 +510,11 @@ function deleteProcessing() {
     let trashs = document.querySelectorAll('#plates .trash');
     trashs.forEach((trash, index) => {
         trash.addEventListener('click', function (e) {
-            var trashid = e.target.dataset.trashid;
-            // console.log(trashid);
-            datas.splice(trashid, 1);
-            displayData(datas, datalist);
+            if (confirm('你確定刪除這筆資料嗎？')) {
+                var trashid = e.target.dataset.trashid;
+                datas.splice(trashid, 1);
+                displayData(datas, datalist);
+            }
         })
 
     })
