@@ -52,7 +52,6 @@
         </div>
       </form>
     </div>`;
-	let myForm;
 	let titleText;
 	let yearText;
 	let hourText;
@@ -117,7 +116,6 @@
 		const inputTable = document.getElementById('mainWrapper');
 		inputTable.innerHTML = inputTableHTML;
 
-		myForm = document.getElementById('myForm');
 		titleText = document.getElementById('title-text');
 		yearText = document.getElementById('year-text');
 		hourText = document.getElementById('hour-text');
@@ -192,6 +190,7 @@
 		// 顯示下方表格程式
 		renderMsgTable();
 
+    const myForm = document.getElementById('myForm');
 		myForm.reset();
 	}
 
