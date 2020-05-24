@@ -58,7 +58,6 @@
 	let hourText;
 	let commentText;
 	let datalist;
-	let inputTable;
 
 	// 第一個星星狀態
 	let starStaus;
@@ -106,16 +105,16 @@
       // 刪除輸入表格
       removeInputTable();
     });
-  };
 
-	// 按addTask 觸發事件
-	let addTask = document.querySelector('.addTaskButton');
-	addTask.addEventListener('click', randerInputTable);
+    // 按addTask 觸發事件
+    const addTask = document.querySelector('.addTaskButton');
+    addTask.addEventListener('click', randerInputTable);
+  };
 
 	// 上方填空欄
 	function randerInputTable() {
 		// console.log(main)
-		inputTable = document.getElementById('mainWrapper');
+		const inputTable = document.getElementById('mainWrapper');
 		inputTable.innerHTML = inputTableHTML;
 
 		myForm = document.getElementById('myForm');
@@ -124,7 +123,6 @@
 		hourText = document.getElementById('hour-text');
 		commentText = document.getElementById('comment-text');
 		datalist = document.getElementById('plates');
-		inputTable = document.getElementById('mainWrapper');
 
 		starStaus = false;
 		checkStatus = false;
@@ -165,7 +163,7 @@
 
 	// 按按鈕 刪除輸入表格
 	function removeInputTable() {
-		inputTable = document.getElementById('mainWrapper');
+		const inputTable = document.getElementById('mainWrapper');
 		inputTable.innerHTML = ``;
 	}
 	// 按按鈕 彈出下方表格
@@ -356,7 +354,7 @@
 					checked = 'checked';
 					typeTitleLine = 'typeTitleLine';
 				}
-				inputTable = document.getElementById('mainWrapper');
+				const inputTable = document.getElementById('mainWrapper');
 				inputTable.innerHTML = `<div class="myFormWrapper">
             <form id="myForm">
                 <div class="titleContainer ${recordContainerColor}">
