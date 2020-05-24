@@ -1,4 +1,57 @@
 (function() {
+  const inputTableHTML = `
+    <div class="myFormWrapper">
+      <form id="myForm">
+        <div class="titleContainer">
+          <div>
+            <input type="checkbox" name="tick">
+            <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
+          </div>
+          <div>
+            <i class="fas fa-star star"></i>
+            <i class="fas fa-trash-alt trash"></i>
+            <i class="fas fa-pen pen"></i>
+          </div>
+        </div>
+        <div class="contentWrapper">
+          <div class="datelineWrapper">
+            <div>
+              <i class="far fa-calendar-alt contentIcon"></i>
+              <span class="contentTitle">Deadline</span>
+            </div>
+            <div class="dateWrapper">
+              <input id="year-text" class="deadlineInput" type="date" placeholder="yyyy-mm-dd">
+              <input id="hour-text" class="deadlineInput" type="time" placeholder="hh:mm">
+            </div>
+          </div>
+          <div class="fileWrapper">
+            <div>
+              <i class="far fa-file contentIcon"></i>
+              <span class="contentTitle">File</span>
+            </div>
+            <div>
+              <label class="upload_cover">
+                <input id="upload_input" type="file">
+                <span class="upload_icon">➕</span>
+              </label>
+            </div>
+          </div>
+          <div class="commentWrapper">
+            <div>
+              <i class="far fa-comment-dots contentIcon"></i>
+              <span class="contentTitle">Comment</span>
+            </div>
+            <div>
+              <input id="comment-text" class="memoInput" type="text" placeholder="Type your memo here">
+            </div>
+          </div>
+        </div>
+        <div class="buttonWrapper">
+          <input class="cancleinput" type="submit" value="✕ Cancle">
+          <input class="addinput" type="submit" value="+ Add Task">
+        </div>
+      </form>
+    </div>`;
 	let myForm;
 	let titleText;
 	let yearText;
@@ -71,62 +124,7 @@
 	function randerInputTable() {
 		// console.log(main)
 		inputTable = document.getElementById('mainWrapper');
-		inputTable.innerHTML = `<div class="myFormWrapper">
-<form id="myForm">
-    <div class="titleContainer">
-        <div>
-            <input type="checkbox" name="tick">
-            <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
-        </div>
-        <div>
-            <i class="fas fa-star star"></i>
-            <i class="fas fa-trash-alt trash"></i>
-            <i class="fas fa-pen pen"></i>
-        </div>
-    </div>
-    <div class="contentWrapper">
-        <div class="datelineWrapper">
-            <div>
-                <i class="far fa-calendar-alt contentIcon"></i>
-                <span class="contentTitle">Deadline</span>
-            </div>
-            <div class="dateWrapper">
-                <input id="year-text" class="deadlineInput" type="date" placeholder="yyyy-mm-dd">
-                <input id="hour-text" class="deadlineInput" type="time" placeholder="hh:mm">
-            </div>
-        </div>
-
-        <div class="fileWrapper">
-            <div>
-                <i class="far fa-file contentIcon"></i>
-                <span class="contentTitle">File</span>
-            </div>
-            <div>
-            <label class="upload_cover">
-            <input id="upload_input" type="file">
-            <span class="upload_icon">➕</span>
-          </label>
-            </div>
-        </div>
-
-        <div class="commentWrapper">
-            <div>
-                <i class="far fa-comment-dots contentIcon"></i>
-                <span class="contentTitle">Comment</span>
-            </div>
-            <div>
-
-                <input id="comment-text" class="memoInput" type="text" placeholder="Type your memo here">
-
-            </div>
-        </div>
-    </div>
-    <div class="buttonWrapper">
-        <input class="cancleinput" type="submit" value="✕ Cancle">
-        <input class="addinput" type="submit" value="+ Add Task">
-    </div>
-</form>
-</div>`;
+		inputTable.innerHTML = inputTableHTML;
 
 		myForm = document.getElementById('myForm');
 		titleText = document.getElementById('title-text');
