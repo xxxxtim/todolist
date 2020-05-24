@@ -52,7 +52,6 @@
         </div>
       </form>
     </div>`;
-	let titleText;
 	let yearText;
 	let hourText;
 	let commentText;
@@ -114,9 +113,8 @@
 	function randerInputTable() {
 		// console.log(main)
 		const inputTable = document.getElementById('mainWrapper');
-		inputTable.innerHTML = inputTableHTML;
+    inputTable.innerHTML = inputTableHTML;
 
-		titleText = document.getElementById('title-text');
 		yearText = document.getElementById('year-text');
 		hourText = document.getElementById('hour-text');
 		commentText = document.getElementById('comment-text');
@@ -170,7 +168,7 @@
 		e.preventDefault();
 
 		data = {
-			title: titleText.value,
+			title: document.getElementById('title-text').value,
 			year: yearText.value,
 			hour: hourText.value,
 			done: checkStatus, //判斷有無打勾
@@ -444,13 +442,12 @@
 					// 避免網頁重整
 					evt.preventDefault();
 					// 抓取修改資料
-					titleText = document.getElementById('title-text');
 					yearText = document.getElementById('year-text');
 					hourText = document.getElementById('hour-text');
 					commentText = document.getElementById('comment-text');
 
 					// 資料寫入
-					datas[penid].title = titleText.value;
+					datas[penid].title = document.getElementById('title-text').value;
 					datas[penid].year = yearText.value;
 					datas[penid].hour = hourText.value;
 					datas[penid].comment = commentText.value;
