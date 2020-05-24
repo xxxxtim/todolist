@@ -52,7 +52,6 @@
         </div>
       </form>
     </div>`;
-	let commentText;
 	let datalist;
 
 	// 第一個星星狀態
@@ -113,7 +112,6 @@
 		const inputTable = document.getElementById('mainWrapper');
     inputTable.innerHTML = inputTableHTML;
 
-		commentText = document.getElementById('comment-text');
 		datalist = document.getElementById('plates');
 
 		starStaus = false;
@@ -170,7 +168,7 @@
 			done: checkStatus, //判斷有無打勾
 			file: false, //判斷有無上傳檔案
 			star: starStaus, //判斷星星
-			comment: commentText.value
+			comment: document.getElementById('comment-text').value
 		};
 
 		datas.push(data);
@@ -438,13 +436,12 @@
 					// 避免網頁重整
 					evt.preventDefault();
 					// 抓取修改資料
-					commentText = document.getElementById('comment-text');
 
 					// 資料寫入
 					datas[penid].title = document.getElementById('title-text').value;
 					datas[penid].year = document.getElementById('year-text').value;
 					datas[penid].hour = document.getElementById('hour-text').value;
-					datas[penid].comment = commentText.value;
+					datas[penid].comment = document.getElementById('comment-text').value;
 					// datas[penid].star = starStaus;
 					// datas[penid].done = checkStatus;
 
