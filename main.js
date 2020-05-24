@@ -94,10 +94,9 @@
     // progress 跳頁面
     const inProgress = document.querySelector('#inProgress');
     inProgress.addEventListener('click', function() {
-      let isDone = false;
       datalist = document.getElementById('plates');
 
-      renderProgressData(datas, datalist, isDone);
+      renderProgressData(datas, datalist);
       // 刪除輸入表格
       removeInputTable();
     });
@@ -492,7 +491,7 @@
 		});
 	}
 
-	function renderProgressData(datas, datalist, isDone) {
+	function renderProgressData(datas, datalist) {
 		console.log(datas);
 		datalist.innerHTML = datas.map((data, i) => {
 			// 星星處理
