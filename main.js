@@ -52,7 +52,6 @@
         </div>
       </form>
     </div>`;
-	let yearText;
 	let hourText;
 	let commentText;
 	let datalist;
@@ -115,7 +114,6 @@
 		const inputTable = document.getElementById('mainWrapper');
     inputTable.innerHTML = inputTableHTML;
 
-		yearText = document.getElementById('year-text');
 		hourText = document.getElementById('hour-text');
 		commentText = document.getElementById('comment-text');
 		datalist = document.getElementById('plates');
@@ -169,7 +167,7 @@
 
 		data = {
 			title: document.getElementById('title-text').value,
-			year: yearText.value,
+			year: document.getElementById('year-text').value,
 			hour: hourText.value,
 			done: checkStatus, //判斷有無打勾
 			file: false, //判斷有無上傳檔案
@@ -442,13 +440,12 @@
 					// 避免網頁重整
 					evt.preventDefault();
 					// 抓取修改資料
-					yearText = document.getElementById('year-text');
 					hourText = document.getElementById('hour-text');
 					commentText = document.getElementById('comment-text');
 
 					// 資料寫入
 					datas[penid].title = document.getElementById('title-text').value;
-					datas[penid].year = yearText.value;
+					datas[penid].year = document.getElementById('year-text').value;
 					datas[penid].hour = hourText.value;
 					datas[penid].comment = commentText.value;
 					// datas[penid].star = starStaus;
