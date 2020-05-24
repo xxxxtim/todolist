@@ -88,13 +88,13 @@
     // myTask 跳頁面
     const myTask = document.querySelector('#myTask');
     myTask.addEventListener('click', function() {
-      renderMsgTable(datas);
+      renderMsgTable();
     });
 
     // progress 跳頁面
     const inProgress = document.querySelector('#inProgress');
     inProgress.addEventListener('click', function() {
-      renderProgressData(datas);
+      renderProgressData();
       // 刪除輸入表格
       removeInputTable();
     });
@@ -102,7 +102,7 @@
     // complete 跳頁面
     const complete = document.querySelector('#complete');
     complete.addEventListener('click', function() {
-      renderCompleteData(datas);
+      renderCompleteData();
       // 刪除輸入表格
       removeInputTable();
     });
@@ -192,7 +192,7 @@
 		// 重新渲染上方表格
 		randerInputTable();
 		// 顯示下方表格程式
-		renderMsgTable(datas);
+		renderMsgTable();
 
 		myForm.reset();
 	}
@@ -228,7 +228,7 @@
 	}
 
 	// 顯示程式
-	function renderMsgTable(datas) {
+	function renderMsgTable() {
     const datalist = document.getElementById('plates');
 		console.log(datas);
 
@@ -314,7 +314,7 @@
 				//     RecordContainer[starid].classList.toggle('recordContainerColor');
 				// }
 
-				renderMsgTable(datas);
+				renderMsgTable();
 			});
 		});
 	}
@@ -332,7 +332,7 @@
 
 				// 渲染畫面處理
 				// TypeTitle[index].classList.toggle('typeTitleLine');
-				renderMsgTable(datas);
+				renderMsgTable();
 			});
 		});
 	}
@@ -463,7 +463,7 @@
 					console.table(datas);
 
 					// 渲染畫面
-					renderMsgTable(datas);
+					renderMsgTable();
 
 					randerInputTable();
 				});
@@ -478,13 +478,13 @@
 				if (confirm('你確定刪除這筆資料嗎？')) {
 					var trashid = e.target.dataset.trashid;
 					datas.splice(trashid, 1);
-					renderMsgTable(datas);
+					renderMsgTable();
 				}
 			});
 		});
 	}
 
-	function renderProgressData(datas) {
+	function renderProgressData() {
     const datalist = document.getElementById('plates');
 		console.log(datas);
 		datalist.innerHTML = datas.map((data, i) => {
@@ -556,7 +556,7 @@
 		removeData();
 	}
 
-	function renderCompleteData(datas) {
+	function renderCompleteData() {
     const datalist = document.getElementById('plates');
 		console.log(datas);
 		datalist.innerHTML = datas.map((data, i) => {
