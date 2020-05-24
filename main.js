@@ -1,8 +1,4 @@
-
-mains();
-
-
-function mains() {
+(function() {
     let myForm;
     let titleText;
     let yearText;
@@ -704,4 +700,4 @@ function mains() {
     }
 
 
-}//mains
+}());
