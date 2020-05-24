@@ -52,7 +52,6 @@
         </div>
       </form>
     </div>`;
-	let datalist;
 
 	// 第一個星星狀態
 	let starStaus;
