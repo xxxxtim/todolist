@@ -82,15 +82,17 @@
 		file: false, //判斷有無上傳檔案
 		star: false, //判斷星星
 		comment: ''
-	};
-	// myTask 跳頁面
-	let myTask = document.querySelector('#myTask');
-	myTask.addEventListener('click', () => {
-		datalist = document.getElementById('plates');
-		// datalist.innerHTML = '';
+  };
+  // myTask 跳頁面
+  function initEventListener() {
+    const myTask = document.querySelector('#myTask');
+    myTask.addEventListener('click', function() {
+      datalist = document.getElementById('plates');
 
-		renderMsgTable(datas, datalist);
-	});
+      renderMsgTable(datas, datalist);
+    });
+  };
+	
 
 	// progress 跳頁面
 	let inProgress = document.querySelector('#inProgress');
@@ -632,5 +634,7 @@
 
 		// 刪除處理
 		removeData();
-	}
+  }
+  
+  initEventListener();
 })();
