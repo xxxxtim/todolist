@@ -98,20 +98,15 @@
       // 刪除輸入表格
       removeInputTable();
     });
-  };
-	
-	// complete 跳頁面
-	let complete = document.querySelector('#complete');
-	complete.addEventListener('click', function() {
-		datalist = document.getElementById('plates');
-		// let arrOfComplete = datas.filter(function (data) {
-		//     return data.done === true;
 
-		// })
-		renderCompleteData(datas, datalist);
-		// 刪除輸入表格
-		removeInputTable();
-	});
+    // complete 跳頁面
+    const complete = document.querySelector('#complete');
+    complete.addEventListener('click', function() {
+      renderCompleteData(datas);
+      // 刪除輸入表格
+      removeInputTable();
+    });
+  };
 
 	// 按addTask 觸發事件
 	let addTask = document.querySelector('.addTaskButton');
@@ -561,7 +556,8 @@
 		removeData();
 	}
 
-	function renderCompleteData(datas, datalist) {
+	function renderCompleteData(datas) {
+    const datalist = document.getElementById('plates');
 		console.log(datas);
 		datalist.innerHTML = datas.map((data, i) => {
 			// 星星處理
