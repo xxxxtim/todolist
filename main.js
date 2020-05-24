@@ -83,26 +83,26 @@
 		star: false, //判斷星星
 		comment: ''
   };
-  // myTask 跳頁面
+
   function initEventListener() {
+    // myTask 跳頁面
     const myTask = document.querySelector('#myTask');
     myTask.addEventListener('click', function() {
       renderMsgTable(datas);
     });
+
+    // progress 跳頁面
+    const inProgress = document.querySelector('#inProgress');
+    inProgress.addEventListener('click', function() {
+      let isDone = false;
+      datalist = document.getElementById('plates');
+
+      renderProgressData(datas, datalist, isDone);
+      // 刪除輸入表格
+      removeInputTable();
+    });
   };
 	
-
-	// progress 跳頁面
-	let inProgress = document.querySelector('#inProgress');
-	inProgress.addEventListener('click', function() {
-		let isDone = false;
-		datalist = document.getElementById('plates');
-
-		renderProgressData(datas, datalist, isDone);
-		// 刪除輸入表格
-		removeInputTable();
-	});
-
 	// complete 跳頁面
 	let complete = document.querySelector('#complete');
 	complete.addEventListener('click', function() {
