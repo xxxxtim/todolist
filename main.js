@@ -1,8 +1,10 @@
+import { datasSorting, isNull } from './module.js';
 
-mains();
+
+main();
 
 
-function mains() {
+function main() {
     let myForm;
     let titleText;
     let yearText;
@@ -50,11 +52,10 @@ function mains() {
     // progress 跳頁面
     let inProgress = document.querySelector('#inProgress');
     inProgress.addEventListener('click', function () {
-        let isDone = false;
         datalist = document.getElementById('plates');
 
 
-        renderProgressData(datas, datalist, isDone);
+        renderProgressData(datas, datalist);
         // 刪除輸入表格
         removeInputTable();
 
@@ -84,61 +85,61 @@ function mains() {
         inputTable = document.getElementById('mainWrapper');
         inputTable.innerHTML
             = `<div class="myFormWrapper">
-<form id="myForm">
-    <div class="titleContainer">
-        <div>
-            <input type="checkbox" name="tick">
-            <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
-        </div>
-        <div>
-            <i class="fas fa-star star"></i>
-            <i class="fas fa-trash-alt trash"></i>
-            <i class="fas fa-pen pen"></i>
-        </div>
-    </div>
-    <div class="contentWrapper">
-        <div class="datelineWrapper">
+    <form id="myForm">
+        <div class="titleContainer">
             <div>
-                <i class="far fa-calendar-alt contentIcon"></i>
-                <span class="contentTitle">Deadline</span>
+                <input type="checkbox" name="tick">
+                <input id="title-text" class="typeTitle" type="text" placeholder="Type Something Here…">
             </div>
-            <div class="dateWrapper">
-                <input id="year-text" class="deadlineInput" type="date" placeholder="yyyy-mm-dd">
-                <input id="hour-text" class="deadlineInput" type="time" placeholder="hh:mm">
+            <div>
+                <i class="fas fa-star star"></i>
+                <i class="fas fa-trash-alt trash"></i>
+                <i class="fas fa-pen pen"></i>
             </div>
         </div>
+        <div class="contentWrapper">
+            <div class="datelineWrapper">
+                <div>
+                    <i class="far fa-calendar-alt contentIcon"></i>
+                    <span class="contentTitle">Deadline</span>
+                </div>
+                <div class="dateWrapper">
+                    <input id="year-text" class="deadlineInput" type="date" placeholder="yyyy-mm-dd">
+                    <input id="hour-text" class="deadlineInput" type="time" placeholder="hh:mm">
+                </div>
+            </div>
 
-        <div class="fileWrapper">
-            <div>
-                <i class="far fa-file contentIcon"></i>
-                <span class="contentTitle">File</span>
+            <div class="fileWrapper">
+                <div>
+                    <i class="far fa-file contentIcon"></i>
+                    <span class="contentTitle">File</span>
+                </div>
+                <div>
+                <label class="upload_cover">
+                <input id="upload_input" type="file">
+                <span class="upload_icon">➕</span>
+              </label>
+                </div>
             </div>
-            <div>
-            <label class="upload_cover">
-            <input id="upload_input" type="file">
-            <span class="upload_icon">➕</span>
-          </label>
+
+            <div class="commentWrapper">
+                <div>
+                    <i class="far fa-comment-dots contentIcon"></i>
+                    <span class="contentTitle">Comment</span>
+                </div>
+                <div>
+
+                    <input id="comment-text" class="memoInput" type="text" placeholder="Type your memo here">
+
+                </div>
             </div>
         </div>
-
-        <div class="commentWrapper">
-            <div>
-                <i class="far fa-comment-dots contentIcon"></i>
-                <span class="contentTitle">Comment</span>
-            </div>
-            <div>
-
-                <input id="comment-text" class="memoInput" type="text" placeholder="Type your memo here">
-
-            </div>
+        <div class="buttonWrapper">
+            <input class="cancleinput" type="submit" value="✕ Cancle">
+            <input class="addinput" type="submit" value="+ Add Task">
         </div>
-    </div>
-    <div class="buttonWrapper">
-        <input class="cancleinput" type="submit" value="✕ Cancle">
-        <input class="addinput" type="submit" value="+ Add Task">
-    </div>
-</form>
-</div>`;
+    </form>
+    </div>`;
 
 
         myForm = document.getElementById('myForm');
@@ -225,7 +226,7 @@ function mains() {
         datas.push(data);
 
         // 進行資料排序
-        datasSorting()
+        datas = datasSorting(datas);
         console.table(datas);
 
 
@@ -240,39 +241,39 @@ function mains() {
     }
 
     // sorting
-    function datasSorting() {
-        let arrayOfComplete = datas.filter(function (data) {
-            return data.done === true;
+    // function datasSorting() {
+    //     let arrayOfComplete = datas.filter(function (data) {
+    //         return data.done === true;
 
-        });
-        // 2.
-        let arrayOfProcess = datas.filter(function (data) {
-            return data.done === false;
-        });
+    //     });
+    //     // 2.
+    //     let arrayOfProcess = datas.filter(function (data) {
+    //         return data.done === false;
+    //     });
 
-        let arrayOfStar = arrayOfProcess.filter(function (data) {
-            return data.star === true;
-        });
+    //     let arrayOfStar = arrayOfProcess.filter(function (data) {
+    //         return data.star === true;
+    //     });
 
-        let arrayOfNoStar = arrayOfProcess.filter(function (data) {
-            return data.star === false
-        });
+    //     let arrayOfNoStar = arrayOfProcess.filter(function (data) {
+    //         return data.star === false
+    //     });
 
-        datas = [...arrayOfStar, ...arrayOfNoStar, ...arrayOfComplete];
-        // 資料進行排序
+    //     datas = [...arrayOfStar, ...arrayOfNoStar, ...arrayOfComplete];
+    //     // 資料進行排序
 
-    }
+    // }
 
 
 
 
     // 判斷是否為空白或空字串
-    function isNull(str) {
-        if (str == "") return true;
-        var regu = "^[ ] $";
-        var re = new RegExp(regu);
-        return re.test(str);
-    }
+    // function isNull(str) {
+    //     if (str == "") return true;
+    //     var regu = "^[ ] $";
+    //     var re = new RegExp(regu);
+    //     return re.test(str);
+    // }
 
 
     // 顯示程式
@@ -545,11 +546,6 @@ function mains() {
 
         })
     }
-
-
-
-
-
 
 
     function renderProgressData(datas, datalist, isDone) {
