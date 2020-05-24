@@ -87,9 +87,7 @@
   function initEventListener() {
     const myTask = document.querySelector('#myTask');
     myTask.addEventListener('click', function() {
-      datalist = document.getElementById('plates');
-
-      renderMsgTable(datas, datalist);
+      renderMsgTable(datas);
     });
   };
 	
@@ -202,7 +200,7 @@
 		// 重新渲染上方表格
 		randerInputTable();
 		// 顯示下方表格程式
-		renderMsgTable(datas, datalist);
+		renderMsgTable(datas);
 
 		myForm.reset();
 	}
@@ -238,7 +236,8 @@
 	}
 
 	// 顯示程式
-	function renderMsgTable(datas, datalist) {
+	function renderMsgTable(datas) {
+    const datalist = document.getElementById('plates');
 		console.log(datas);
 
 		datalist.innerHTML = datas.map((data, i) => {
@@ -323,7 +322,7 @@
 				//     RecordContainer[starid].classList.toggle('recordContainerColor');
 				// }
 
-				renderMsgTable(datas, datalist);
+				renderMsgTable(datas);
 			});
 		});
 	}
@@ -341,7 +340,7 @@
 
 				// 渲染畫面處理
 				// TypeTitle[index].classList.toggle('typeTitleLine');
-				renderMsgTable(datas, datalist);
+				renderMsgTable(datas);
 			});
 		});
 	}
@@ -460,7 +459,6 @@
 					yearText = document.getElementById('year-text');
 					hourText = document.getElementById('hour-text');
 					commentText = document.getElementById('comment-text');
-					datalist = document.getElementById('plates');
 
 					// 資料寫入
 					datas[penid].title = titleText.value;
@@ -473,7 +471,7 @@
 					console.table(datas);
 
 					// 渲染畫面
-					renderMsgTable(datas, datalist);
+					renderMsgTable(datas);
 
 					randerInputTable();
 				});
@@ -488,7 +486,7 @@
 				if (confirm('你確定刪除這筆資料嗎？')) {
 					var trashid = e.target.dataset.trashid;
 					datas.splice(trashid, 1);
-					renderMsgTable(datas, datalist);
+					renderMsgTable(datas);
 				}
 			});
 		});
