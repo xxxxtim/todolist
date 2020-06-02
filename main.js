@@ -696,6 +696,7 @@ function main() {
 
         // 刪除處理
         removeData();
+        // dsijfoidsjfioj
 
     }
 
