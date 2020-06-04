@@ -60,30 +60,14 @@ import { datasSorting, isNull } from './module.js';
         </div>
     </form>
     </div>`;
-
-    // let myForm;
-    // let titleText;
-    // let yearText;
-    // let hourText;
-    // let commentText;
-    // let datalist;
-    // let inputTable;
-
-
+    /* global variable */
     // 第一個星星狀態
     let starStaus;
     // 第一個打勾狀態
     let checkStatus;
-
-    // button
-    // let addTask;
-    // let addTaskOfInptTbl;
-    // let cancleOfInptTbl;
-    // let starOfInptTbl;//星星
-    // let checkOfInptTbl;//打勾
-    // object
-    let datas = [];
     // 排序後存取的array
+    let datas = [];
+
     let data = {
         title: "",
         year: "",
@@ -93,13 +77,12 @@ import { datasSorting, isNull } from './module.js';
         star: false,//判斷星星
         comment: "",
     }
+
+
     // myTask 跳頁面
     function initEventListener() {
         const myTask = document.querySelector('#myTask');
         myTask.addEventListener('click', () => {
-            // const datalist = document.getElementById('plates');
-            // datalist.innerHTML = '';
-
             renderMsgTable();
 
         })
@@ -110,9 +93,6 @@ import { datasSorting, isNull } from './module.js';
     // progress 跳頁面
     const inProgress = document.querySelector('#inProgress');
     inProgress.addEventListener('click', function () {
-        // datalist = document.getElementById('plates');
-
-
         renderProgressData();
         // 刪除輸入表格
         removeInputTable();
@@ -122,10 +102,7 @@ import { datasSorting, isNull } from './module.js';
     // complete 跳頁面
     const complete = document.querySelector('#complete');
     complete.addEventListener('click', function () {
-        // let arrOfComplete = datas.filter(function (data) {
-        //     return data.done === true;
 
-        // })
         renderCompleteData();
         // 刪除輸入表格
         removeInputTable();
@@ -138,26 +115,10 @@ import { datasSorting, isNull } from './module.js';
 
     // 上方填空欄
     function randerInputTable() {
-        // console.log(main)
         const inputTable = document.getElementById('mainWrapper');
         inputTable.innerHTML = inputTableHTML;
-
-
-        // const myForm = document.getElementById('myForm');
-        // const titleText = document.getElementById('title-text');
-        // const yearText = document.getElementById('year-text');
-        // hourText = document.getElementById('hour-text');
-        // commentText = document.getElementById('comment-text');
-        // datalist = document.getElementById('plates');
-        // inputTable = document.getElementById('mainWrapper');
-
         starStaus = false;
         checkStatus = false;
-
-
-
-
-
 
         // 按第一個星星
         const starOfInptTbl = document.querySelector('.titleContainer .star');
@@ -165,16 +126,12 @@ import { datasSorting, isNull } from './module.js';
         // 第一個打勾
         const checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
         checkOfInptTbl.addEventListener('click', checkOfInptTblProcessing);
-
-
-
         // 按按鈕 彈出下方表格 並且重新reset上方表格
         const addTaskOfInptTbl = document.querySelector('.addinput');
         addTaskOfInptTbl.addEventListener('click', addTaskOfInptTblProcessing);
         // 按按鈕 刪除下方表格
         const cancleOfInptTbl = document.querySelector('.cancleinput');
         cancleOfInptTbl.addEventListener('click', removeInputTable);
-
     }
 
 
@@ -209,12 +166,9 @@ import { datasSorting, isNull } from './module.js';
     // 按按鈕 彈出下方表格
     function addTaskOfInptTblProcessing(e) {
         const myForm = document.getElementById('myForm');
-        // 加上preventDefault()避免每次submit都會重整網頁
+        // 避免每次submit都會重整網頁
         e.preventDefault();
-
-
         data = {
-            // title: titleText.value,
             title: document.getElementById('title-text').value,
             year: document.getElementById('year-text').value,
             hour: document.getElementById('hour-text').value,
@@ -224,62 +178,18 @@ import { datasSorting, isNull } from './module.js';
             comment: document.getElementById('comment-text').value,
 
         };
-
-
-
         datas.push(data);
-
         // 進行資料排序
         datas = datasSorting(datas);
-        console.table(datas);
-
-
+        // console.table(datas);
         // 重新渲染上方表格
         randerInputTable();
         // 顯示下方表格程式
         renderMsgTable();
-
-
+        // 重整上方表格
         myForm.reset();
 
     }
-
-    // sorting
-    // function datasSorting() {
-    //     let arrayOfComplete = datas.filter(function (data) {
-    //         return data.done === true;
-
-    //     });
-    //     // 2.
-    //     let arrayOfProcess = datas.filter(function (data) {
-    //         return data.done === false;
-    //     });
-
-    //     let arrayOfStar = arrayOfProcess.filter(function (data) {
-    //         return data.star === true;
-    //     });
-
-    //     let arrayOfNoStar = arrayOfProcess.filter(function (data) {
-    //         return data.star === false
-    //     });
-
-    //     datas = [...arrayOfStar, ...arrayOfNoStar, ...arrayOfComplete];
-    //     // 資料進行排序
-
-    // }
-
-
-
-
-    // 判斷是否為空白或空字串
-    // function isNull(str) {
-    //     if (str == "") return true;
-    //     var regu = "^[ ] $";
-    //     var re = new RegExp(regu);
-    //     return re.test(str);
-    // }
-
-
     // 顯示程式
     function renderMsgTable() {
         // console.log(datas);
@@ -361,12 +271,6 @@ import { datasSorting, isNull } from './module.js';
                 datas[starid].star = !datas[starid].star;
                 console.table(datas);
 
-                // 渲染畫面處理
-                // if (datas[starid].star === true) {
-                //     star.classList.toggle('starColor');
-                //     RecordContainer[starid].classList.toggle('recordContainerColor');
-                // }
-
                 renderMsgTable();
             })
         })
@@ -374,18 +278,13 @@ import { datasSorting, isNull } from './module.js';
     // 打勾處理
     function checkOfMsgTblProcessing() {
         const Ticks = document.getElementsByName("tick");
-        // const TypeTitle = document.querySelectorAll('.typeTitle');
-
         Ticks.forEach((tick, index) => {
             tick.addEventListener('click', function (e) {
-
                 // 資料更新處理
                 let checkid = e.target.dataset.checkid;
                 datas[checkid].done = !datas[checkid].done;
                 console.table(datas);
-
                 // 渲染畫面處理
-                // TypeTitle[index].classList.toggle('typeTitleLine');
                 renderMsgTable();
             })
         })
@@ -471,56 +370,37 @@ import { datasSorting, isNull } from './module.js';
                 // cancle按鈕
                 const cancleOfInptTbl = document.querySelector('.cancleinput');
                 cancleOfInptTbl.addEventListener('click', removeInputTable);
-
-                // // 按第一個星星
+                // 按第一個星星
                 const starOfInptTbl = document.querySelector('.titleContainer .star');
                 starOfInptTbl.addEventListener('click', () => {
-                    let titleContainer = document.querySelector('.titleContainer');
+                    const titleContainer = document.querySelector('.titleContainer');
                     datas[penid].star = !datas[penid].star;
-
                     // 渲染頁面
                     starOfInptTbl.classList.toggle('starColor');
                     titleContainer.classList.toggle('recordContainerColor');
                 });
 
-                // // 按第一個打勾
+                // 按第一個打勾
                 const checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
                 checkOfInptTbl.addEventListener('click', () => {
                     const typeTitle = document.querySelector('.titleContainer .typeTitle');
                     datas[penid].done = !datas[penid].done;
-
                     // 渲染頁面
                     typeTitle.classList.toggle('typeTitleLine');
                 });
 
-                console.table(datas);
+                // console.table(datas);
                 // 存取按鈕
                 const addTaskOfInptTbl = document.querySelector('.addinput');
                 addTaskOfInptTbl.addEventListener('click', (evt) => {
                     // 避免網頁重整
                     evt.preventDefault();
-                    // 抓取修改資料
-                    // const titleText = document.getElementById('title-text');
-                    // yearText = document.getElementById('year-text');
-                    // hourText = document.getElementById('hour-text');
-                    // commentText = document.getElementById('comment-text');
-                    // datalist = document.getElementById('plates');
-
-
-
-
-
                     // 資料寫入
                     datas[penid].title = document.getElementById('title-text').value;
                     datas[penid].year = document.getElementById('year-text').value;
                     datas[penid].hour = document.getElementById('hour-text').value;
                     datas[penid].comment = document.getElementById('comment-text').value;
-                    // datas[penid].star = starStaus;
-                    // datas[penid].done = checkStatus;
-
-
-
-                    console.table(datas);
+                    // console.table(datas);
 
 
                     // 渲染畫面
