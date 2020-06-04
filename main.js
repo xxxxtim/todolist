@@ -1,90 +1,10 @@
 import { datasSorting, isNull } from './module.js';
 
 
-main();
 
+(function main() {
 
-function main() {
-    let myForm;
-    let titleText;
-    let yearText;
-    let hourText;
-    let commentText;
-    let datalist;
-    let inputTable;
-
-
-    // 第一個星星狀態
-    let starStaus;
-    // 第一個打勾狀態
-    let checkStatus;
-
-    // button
-    // let addTask;
-    let addTaskOfInptTbl;
-    let cancleOfInptTbl;
-    let starOfInptTbl;//星星
-    let checkOfInptTbl;//打勾
-    // object
-    let datas = [];
-    // 排序後存取的array
-    let data = {
-        title: "",
-        year: "",
-        hour: "",
-        done: false,//判斷有無打勾
-        file: false,//判斷有無上傳檔案
-        star: false,//判斷星星
-        comment: "",
-    }
-    // myTask 跳頁面
-    let myTask = document.querySelector('#myTask');
-    myTask.addEventListener('click', () => {
-        datalist = document.getElementById('plates');
-        // datalist.innerHTML = '';
-
-        renderMsgTable(datas, datalist);
-
-    })
-
-
-
-    // progress 跳頁面
-    let inProgress = document.querySelector('#inProgress');
-    inProgress.addEventListener('click', function () {
-        datalist = document.getElementById('plates');
-
-
-        renderProgressData(datas, datalist);
-        // 刪除輸入表格
-        removeInputTable();
-
-    })
-
-    // complete 跳頁面
-    let complete = document.querySelector('#complete');
-    complete.addEventListener('click', function () {
-        datalist = document.getElementById('plates');
-        // let arrOfComplete = datas.filter(function (data) {
-        //     return data.done === true;
-
-        // })
-        renderCompleteData(datas, datalist);
-        // 刪除輸入表格
-        removeInputTable();
-
-    })
-
-    // 按addTask 觸發事件
-    let addTask = document.querySelector('.addTaskButton');
-    addTask.addEventListener('click', randerInputTable);
-
-    // 上方填空欄
-    function randerInputTable() {
-        // console.log(main)
-        inputTable = document.getElementById('mainWrapper');
-        inputTable.innerHTML
-            = `<div class="myFormWrapper">
+    const inputTableHTML = `<div class="myFormWrapper">
     <form id="myForm">
         <div class="titleContainer">
             <div>
@@ -141,14 +61,95 @@ function main() {
     </form>
     </div>`;
 
+    // let myForm;
+    // let titleText;
+    // let yearText;
+    // let hourText;
+    // let commentText;
+    // let datalist;
+    // let inputTable;
 
-        myForm = document.getElementById('myForm');
-        titleText = document.getElementById('title-text');
-        yearText = document.getElementById('year-text');
-        hourText = document.getElementById('hour-text');
-        commentText = document.getElementById('comment-text');
-        datalist = document.getElementById('plates');
-        inputTable = document.getElementById('mainWrapper');
+
+    // 第一個星星狀態
+    let starStaus;
+    // 第一個打勾狀態
+    let checkStatus;
+
+    // button
+    // let addTask;
+    // let addTaskOfInptTbl;
+    // let cancleOfInptTbl;
+    // let starOfInptTbl;//星星
+    // let checkOfInptTbl;//打勾
+    // object
+    let datas = [];
+    // 排序後存取的array
+    let data = {
+        title: "",
+        year: "",
+        hour: "",
+        done: false,//判斷有無打勾
+        file: false,//判斷有無上傳檔案
+        star: false,//判斷星星
+        comment: "",
+    }
+    // myTask 跳頁面
+    function initEventListener() {
+        const myTask = document.querySelector('#myTask');
+        myTask.addEventListener('click', () => {
+            // const datalist = document.getElementById('plates');
+            // datalist.innerHTML = '';
+
+            renderMsgTable();
+
+        })
+    }
+
+
+
+    // progress 跳頁面
+    const inProgress = document.querySelector('#inProgress');
+    inProgress.addEventListener('click', function () {
+        // datalist = document.getElementById('plates');
+
+
+        renderProgressData();
+        // 刪除輸入表格
+        removeInputTable();
+
+    })
+
+    // complete 跳頁面
+    const complete = document.querySelector('#complete');
+    complete.addEventListener('click', function () {
+        // let arrOfComplete = datas.filter(function (data) {
+        //     return data.done === true;
+
+        // })
+        renderCompleteData();
+        // 刪除輸入表格
+        removeInputTable();
+
+    })
+
+    // 按addTask 觸發事件
+    const addTask = document.querySelector('.addTaskButton');
+    addTask.addEventListener('click', randerInputTable);
+
+    // 上方填空欄
+    function randerInputTable() {
+        // console.log(main)
+        const inputTable = document.getElementById('mainWrapper');
+        inputTable.innerHTML = inputTableHTML;
+
+
+        // const myForm = document.getElementById('myForm');
+        // const titleText = document.getElementById('title-text');
+        // const yearText = document.getElementById('year-text');
+        // hourText = document.getElementById('hour-text');
+        // commentText = document.getElementById('comment-text');
+        // datalist = document.getElementById('plates');
+        // inputTable = document.getElementById('mainWrapper');
 
         starStaus = false;
         checkStatus = false;
@@ -159,19 +160,19 @@ function main() {
 
 
         // 按第一個星星
-        starOfInptTbl = document.querySelector('.titleContainer .star');
+        const starOfInptTbl = document.querySelector('.titleContainer .star');
         starOfInptTbl.addEventListener('click', starOfInptTblProcessing);
         // 第一個打勾
-        checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
+        const checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
         checkOfInptTbl.addEventListener('click', checkOfInptTblProcessing);
 
 
 
         // 按按鈕 彈出下方表格 並且重新reset上方表格
-        addTaskOfInptTbl = document.querySelector('.addinput');
+        const addTaskOfInptTbl = document.querySelector('.addinput');
         addTaskOfInptTbl.addEventListener('click', addTaskOfInptTblProcessing);
         // 按按鈕 刪除下方表格
-        cancleOfInptTbl = document.querySelector('.cancleinput');
+        const cancleOfInptTbl = document.querySelector('.cancleinput');
         cancleOfInptTbl.addEventListener('click', removeInputTable);
 
     }
@@ -180,7 +181,8 @@ function main() {
 
     // 第1顆星星
     function starOfInptTblProcessing() {
-        let titleContainer = document.querySelector('.titleContainer');
+        const titleContainer = document.querySelector('.titleContainer');
+        const starOfInptTbl = document.querySelector('.titleContainer .star');
         // 資料更新
         starStaus = !starStaus;
         // 渲染頁面
@@ -190,7 +192,7 @@ function main() {
 
     // 第一個打勾
     function checkOfInptTblProcessing() {
-        let typeTitle = document.querySelector('.titleContainer .typeTitle');
+        const typeTitle = document.querySelector('.titleContainer .typeTitle');
         // 資料更新
         checkStatus = !checkStatus;
         // 渲染頁面
@@ -200,24 +202,26 @@ function main() {
 
     // 按按鈕 刪除輸入表格
     function removeInputTable() {
-        inputTable = document.getElementById('mainWrapper');
+        const inputTable = document.getElementById('mainWrapper');
         inputTable.innerHTML
             = ``;
     }
     // 按按鈕 彈出下方表格
     function addTaskOfInptTblProcessing(e) {
+        const myForm = document.getElementById('myForm');
         // 加上preventDefault()避免每次submit都會重整網頁
         e.preventDefault();
 
 
         data = {
-            title: titleText.value,
-            year: yearText.value,
-            hour: hourText.value,
+            // title: titleText.value,
+            title: document.getElementById('title-text').value,
+            year: document.getElementById('year-text').value,
+            hour: document.getElementById('hour-text').value,
             done: checkStatus,//判斷有無打勾
             file: false,//判斷有無上傳檔案
             star: starStaus,//判斷星星
-            comment: commentText.value,
+            comment: document.getElementById('comment-text').value,
 
         };
 
@@ -233,7 +237,7 @@ function main() {
         // 重新渲染上方表格
         randerInputTable();
         // 顯示下方表格程式
-        renderMsgTable(datas, datalist);
+        renderMsgTable();
 
 
         myForm.reset();
@@ -277,9 +281,9 @@ function main() {
 
 
     // 顯示程式
-    function renderMsgTable(datas, datalist) {
-        console.log(datas);
-
+    function renderMsgTable() {
+        // console.log(datas);
+        const datalist = document.getElementById('plates');
         datalist.innerHTML = datas.map((data, i) => {
             // 星星處理
             let starColor = "";
@@ -348,7 +352,7 @@ function main() {
 
     // 星星處理
     function starOfMsgTblProcessing() {
-        let stars = document.querySelectorAll('#plates .star');
+        const stars = document.querySelectorAll('#plates .star');
         stars.forEach((star, index) => {
             // console.log(starData)
             star.addEventListener('click', function (e) {
@@ -363,13 +367,13 @@ function main() {
                 //     RecordContainer[starid].classList.toggle('recordContainerColor');
                 // }
 
-                renderMsgTable(datas, datalist);
+                renderMsgTable();
             })
         })
     }
     // 打勾處理
     function checkOfMsgTblProcessing() {
-        let Ticks = document.getElementsByName("tick");
+        const Ticks = document.getElementsByName("tick");
         // const TypeTitle = document.querySelectorAll('.typeTitle');
 
         Ticks.forEach((tick, index) => {
@@ -382,13 +386,13 @@ function main() {
 
                 // 渲染畫面處理
                 // TypeTitle[index].classList.toggle('typeTitleLine');
-                renderMsgTable(datas, datalist);
+                renderMsgTable();
             })
         })
     }
     // 鉛筆處理
     function penOfMsgTblProcessing() {
-        let pens = document.querySelectorAll('#plates .pen');
+        const pens = document.querySelectorAll('#plates .pen');
         pens.forEach((pen, index) => {
             pen.addEventListener('click', function (e) {
                 let penid = e.target.dataset.penid;
@@ -406,7 +410,7 @@ function main() {
                     checked = 'checked';
                     typeTitleLine = 'typeTitleLine';
                 }
-                inputTable = document.getElementById('mainWrapper');
+                const inputTable = document.getElementById('mainWrapper');
                 inputTable.innerHTML = `<div class="myFormWrapper">
             <form id="myForm">
                 <div class="titleContainer ${recordContainerColor}">
@@ -465,11 +469,11 @@ function main() {
             </div>`;
 
                 // cancle按鈕
-                cancleOfInptTbl = document.querySelector('.cancleinput');
+                const cancleOfInptTbl = document.querySelector('.cancleinput');
                 cancleOfInptTbl.addEventListener('click', removeInputTable);
 
                 // // 按第一個星星
-                starOfInptTbl = document.querySelector('.titleContainer .star');
+                const starOfInptTbl = document.querySelector('.titleContainer .star');
                 starOfInptTbl.addEventListener('click', () => {
                     let titleContainer = document.querySelector('.titleContainer');
                     datas[penid].star = !datas[penid].star;
@@ -480,9 +484,9 @@ function main() {
                 });
 
                 // // 按第一個打勾
-                checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
+                const checkOfInptTbl = document.querySelector('.titleContainer [name="tick"]');
                 checkOfInptTbl.addEventListener('click', () => {
-                    let typeTitle = document.querySelector('.titleContainer .typeTitle');
+                    const typeTitle = document.querySelector('.titleContainer .typeTitle');
                     datas[penid].done = !datas[penid].done;
 
                     // 渲染頁面
@@ -491,26 +495,26 @@ function main() {
 
                 console.table(datas);
                 // 存取按鈕
-                addTaskOfInptTbl = document.querySelector('.addinput');
+                const addTaskOfInptTbl = document.querySelector('.addinput');
                 addTaskOfInptTbl.addEventListener('click', (evt) => {
                     // 避免網頁重整
                     evt.preventDefault();
                     // 抓取修改資料
-                    titleText = document.getElementById('title-text');
-                    yearText = document.getElementById('year-text');
-                    hourText = document.getElementById('hour-text');
-                    commentText = document.getElementById('comment-text');
-                    datalist = document.getElementById('plates');
+                    // const titleText = document.getElementById('title-text');
+                    // yearText = document.getElementById('year-text');
+                    // hourText = document.getElementById('hour-text');
+                    // commentText = document.getElementById('comment-text');
+                    // datalist = document.getElementById('plates');
 
 
 
 
 
                     // 資料寫入
-                    datas[penid].title = titleText.value;
-                    datas[penid].year = yearText.value;
-                    datas[penid].hour = hourText.value;
-                    datas[penid].comment = commentText.value;
+                    datas[penid].title = document.getElementById('title-text').value;
+                    datas[penid].year = document.getElementById('year-text').value;
+                    datas[penid].hour = document.getElementById('hour-text').value;
+                    datas[penid].comment = document.getElementById('comment-text').value;
                     // datas[penid].star = starStaus;
                     // datas[penid].done = checkStatus;
 
@@ -520,7 +524,7 @@ function main() {
 
 
                     // 渲染畫面
-                    renderMsgTable(datas, datalist);
+                    renderMsgTable();
 
                     randerInputTable();
 
@@ -534,13 +538,13 @@ function main() {
 
 
     function removeData() {
-        let trashs = document.querySelectorAll('#plates .trash');
+        const trashs = document.querySelectorAll('#plates .trash');
         trashs.forEach((trash, index) => {
             trash.addEventListener('click', function (e) {
                 if (confirm('你確定刪除這筆資料嗎？')) {
                     var trashid = e.target.dataset.trashid;
                     datas.splice(trashid, 1);
-                    renderMsgTable(datas, datalist);
+                    renderMsgTable();
                 }
             })
 
@@ -548,8 +552,9 @@ function main() {
     }
 
 
-    function renderProgressData(datas, datalist, isDone) {
-        console.log(datas)
+    function renderProgressData() {
+        const datalist = document.getElementById('plates');
+        // console.log(datas)
         datalist.innerHTML = datas.map((data, i) => {
             // 星星處理
             let starColor = "";
@@ -624,8 +629,9 @@ function main() {
     }
 
 
-    function renderCompleteData(datas, datalist) {
-        console.log(datas)
+    function renderCompleteData() {
+        const datalist = document.getElementById('plates');
+        // console.log(datas)
         datalist.innerHTML = datas.map((data, i) => {
             // 星星處理
             let starColor = "";
@@ -700,5 +706,5 @@ function main() {
 
     }
 
-
-}//mains
+    initEventListener();
+}())//mains
