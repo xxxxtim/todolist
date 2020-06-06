@@ -61,6 +61,7 @@ import { datasSorting, isNull } from './module.js';
     </form>
     </div>`;
     /* global variable */
+    let statusOfbar = 0;
     // 第一個星星狀態
     let starStaus;
     // 第一個打勾狀態
@@ -83,6 +84,7 @@ import { datasSorting, isNull } from './module.js';
     function initEventListener() {
         const myTask = document.querySelector('#myTask');
         myTask.addEventListener('click', () => {
+            statusOfbar = 0;
             renderMsgTable();
 
         })
@@ -93,6 +95,7 @@ import { datasSorting, isNull } from './module.js';
     // progress 跳頁面
     const inProgress = document.querySelector('#inProgress');
     inProgress.addEventListener('click', function () {
+        statusOfbar = 1;
         renderProgressData();
         // 刪除輸入表格
         removeInputTable();
@@ -102,7 +105,7 @@ import { datasSorting, isNull } from './module.js';
     // complete 跳頁面
     const complete = document.querySelector('#complete');
     complete.addEventListener('click', function () {
-
+        statusOfbar = 2;
         renderCompleteData();
         // 刪除輸入表格
         removeInputTable();
@@ -185,7 +188,10 @@ import { datasSorting, isNull } from './module.js';
         // 重新渲染上方表格
         randerInputTable();
         // 顯示下方表格程式
-        renderMsgTable();
+        if (statusOfbar === 0) { renderMsgTable() };
+        if (statusOfbar === 1) { renderProgressData() };
+        if (statusOfbar === 2) { renderCompleteData() };
+
         // 重整上方表格
         myForm.reset();
 
@@ -246,7 +252,7 @@ import { datasSorting, isNull } from './module.js';
         </div>
 
 `;
-        })
+        }).join('');
         // 星星處理
         starOfMsgTblProcessing();
         // 打勾處理
@@ -270,8 +276,12 @@ import { datasSorting, isNull } from './module.js';
                 let starid = e.target.dataset.starid;
                 datas[starid].star = !datas[starid].star;
                 console.table(datas);
+                datas = datasSorting(datas);
+                // 顯示下方表格程式
+                if (statusOfbar === 0) { renderMsgTable() };
+                if (statusOfbar === 1) { renderProgressData() };
+                if (statusOfbar === 2) { renderCompleteData() };
 
-                renderMsgTable();
             })
         })
     }
@@ -285,7 +295,11 @@ import { datasSorting, isNull } from './module.js';
                 datas[checkid].done = !datas[checkid].done;
                 console.table(datas);
                 // 渲染畫面處理
-                renderMsgTable();
+                datas = datasSorting(datas);
+                // 顯示下方表格程式
+                if (statusOfbar === 0) { renderMsgTable() };
+                if (statusOfbar === 1) { renderProgressData() };
+                if (statusOfbar === 2) { renderCompleteData() };
             })
         })
     }
@@ -404,8 +418,11 @@ import { datasSorting, isNull } from './module.js';
 
 
                     // 渲染畫面
-                    renderMsgTable();
-
+                    datas = datasSorting(datas);
+                    // 顯示下方表格程式
+                    if (statusOfbar === 0) { renderMsgTable() };
+                    if (statusOfbar === 1) { renderProgressData() };
+                    if (statusOfbar === 2) { renderCompleteData() };
                     randerInputTable();
 
 
@@ -424,7 +441,12 @@ import { datasSorting, isNull } from './module.js';
                 if (confirm('你確定刪除這筆資料嗎？')) {
                     var trashid = e.target.dataset.trashid;
                     datas.splice(trashid, 1);
-                    renderMsgTable();
+                    datas = datasSorting(datas);
+                    // 顯示下方表格程式
+                    if (statusOfbar === 0) { renderMsgTable() };
+                    if (statusOfbar === 1) { renderProgressData() };
+                    if (statusOfbar === 2) { renderCompleteData() };
+
                 }
             })
 
@@ -488,13 +510,12 @@ import { datasSorting, isNull } from './module.js';
                 ${messageIcon}
             </div>
         </div>
-
-`;
+        `;
             }
             else {
                 return ``;
             }
-        })
+        }).join('');
         // 星星處理
         starOfMsgTblProcessing();
         // 打勾處理
@@ -571,7 +592,7 @@ import { datasSorting, isNull } from './module.js';
             else {
                 return ``;
             }
-        })
+        }).join('');
         // 星星處理
         starOfMsgTblProcessing();
         // 打勾處理
