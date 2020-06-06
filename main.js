@@ -195,6 +195,9 @@ import { datasSorting, isNull } from './module.js';
         // 重整上方表格
         myForm.reset();
 
+        removeInputTable();
+
+
     }
     // 顯示程式
     function renderMsgTable() {
@@ -424,6 +427,8 @@ import { datasSorting, isNull } from './module.js';
                     if (statusOfbar === 1) { renderProgressData() };
                     if (statusOfbar === 2) { renderCompleteData() };
                     randerInputTable();
+                    removeInputTable();
+
 
 
                 });
