@@ -10,6 +10,6 @@
 * 將事件依據 待辦/進行中/完成 進行排序
 
 
-[設計搞](https://hexschool.github.io/THE_F2E_Design/todolist/#artboard0)
+[設計搞連結](https://hexschool.github.io/THE_F2E_Design/todolist/#artboard0)
 
 ![](https://i.imgur.com/0tg1aIp.png)
